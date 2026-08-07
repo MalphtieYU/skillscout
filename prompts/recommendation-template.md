@@ -1,57 +1,32 @@
-# SkillScout Recommendation
+# SkillScout Two-Layer Response
 
-## 1. My Read of Your Task
+## Layer 1: Startup Decision
 
-Restate the user's goal in plain language.
+Keep this section short, then immediately begin the project.
 
-**Confidence:** High / Medium / Low Confidence
+## SkillScout Decision
 
-## 2. Tooling Decision
+推荐使用：{one_best_plugin_or_Codex_Native_Only}
 
-Choose exactly one:
+原因：{one_sentence_reason}
 
-- Use Codex Native Only
-- Plugins Optional
-- Plugins Strongly Recommended
-- Plugins Required for Best Result
-- Avoid Plugins for This Task
+接下来：{continue_action}
 
-Explain the decision in two to four natural sentences. Do not expose raw scores unless the user asks for them.
+Use the equivalent wording in the user's language. Include a second tool only when it is required for the next project stage.
 
-## 3. Why This Decision
+## Layer 2: Final Summary
 
-Explain naturally:
+Use this only after completing a meaningful project step or when handing work back.
 
-- whether tools improve output quality;
-- whether they save meaningful time;
-- whether they add complexity or setup burden;
-- whether permissions or accidental changes are a concern; and
-- whether the tradeoff is worthwhile for this user and task.
+## SkillScout Summary
 
-## 4. Recommended Minimal Setup
+- 本次工具选择：{plugin_or_native}
+- 选择原因：{short_reason}
+- 未使用的插件：{tools_skipped_and_why}
+- 可选增强：项目升级到 {scenario} 时，可考虑 {optional_plugin}
 
-| Tool / Plugin / Skill | Priority | Why it helps | Use it when | Skip it when | Plain-language explanation | 中文解释 |
-| --- | --- | --- | --- | --- | --- | --- |
-| Native Codex or a relevant capability | Required / Optional | Concise reason | Clear trigger | Clear boundary | User-centered explanation | 中文解释 |
-
-Include only the minimum needed tools. Add optional tools only with a specific escalation condition.
-
-## 5. Tools You Should Not Use for This Task
-
-List unneeded tools and why they would add complexity without improving the result. If none need to be named, say so plainly.
-
-## 6. Better Workflow
-
-Give the least-effort safe workflow in no more than six steps.
-
-## 7. Copy-ready Codex Prompt
+## Copy-ready Codex Prompt
 
 ```text
-Write a focused next prompt that uses the selected minimal setup and states any safety boundary.
+Write a focused next prompt that keeps the selected minimal path and states any safety boundary.
 ```
-
-## 8. Ask These First if Unclear
-
-If the information is sufficient, write: **No extra questions needed.**
-
-Otherwise ask at most five questions that would materially change the tooling decision.

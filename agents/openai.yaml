@@ -1,4 +1,4 @@
 interface:
   display_name: "SkillScout"
-  short_description: "Decide the smallest safe Codex tool stack."
-  default_prompt: "Use $skillscout to decide whether my Codex task needs tools or native capability only."
+  short_description: "Choose one best tool, then continue the project."
+  default_prompt: "Use $skillscout to pick the best starting path for my project and continue without making me compare tools."

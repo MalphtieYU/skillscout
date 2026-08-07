@@ -33,11 +33,13 @@ const complexityData = readJson("data/task-complexity-rules.json");
 const minimalStackData = readJson("data/minimal-tool-stack-rules.json");
 const permissionData = readJson("data/permission-risk-rules.json");
 const registrySchema = readJson("data/plugin-registry.schema.json");
+const singleBestData = readJson("data/single-best-plugin-rules.json");
+const primarySecondaryData = readJson("data/primary-secondary-tool-rules.json");
+const installRegistrySchema = readJson("data/plugin-install-registry.schema.json");
 
-const versionedData = [categoriesData, rulesData, frameworkData, antiRulesData, complexityData, minimalStackData, permissionData];
+const versionedData = [categoriesData, rulesData, frameworkData, antiRulesData, complexityData, minimalStackData, permissionData, singleBestData, primarySecondaryData];
 for (const data of versionedData) {
   assert(/^\d+\.\d+\.\d+$/.test(data.schema_version), "all rule data needs a semantic schema_version");
-  assert(data.schema_version === "1.0.0", "all rule data must use schema_version 1.0.0");
 }
 
 nonEmptyArray(categoriesData.categories, "categories");
@@ -100,7 +102,33 @@ assert(registrySchema.type === "object", "plugin registry schema must describe a
 const registryFields = ["id", "name", "type", "description_en", "description_zh", "categories", "required_permissions", "read_actions", "write_actions", "best_for", "not_for", "complexity_level", "risk_level", "setup_difficulty", "examples", "last_updated", "source_url"];
 assert(registryFields.every((field) => Object.hasOwn(registrySchema.properties, field)), "plugin registry schema fields are incomplete");
 
+const expectedPrimaryRules = ["github-repository", "figma-design", "google-drive-files", "gmail-messages", "calendar-events", "pdf-files", "spreadsheet-data", "slide-output", "image-output", "current-web-information", "private-system", "native-text-and-small-work"];
+nonEmptyArray(singleBestData.rules, "single-best-plugin rules");
+assert(expectedPrimaryRules.every((id) => singleBestData.rules.some((rule) => rule.id === id)), "single-best-plugin rules are incomplete");
+for (const rule of singleBestData.rules) {
+  nonEmptyArray(rule.task_signal, `${rule.id}.task_signal`);
+  for (const field of ["primary_plugin", "why_this_plugin", "when_to_skip", "fallback_to_native"]) assert(typeof rule[field] === "string" && rule[field].trim(), `${rule.id} needs ${field}`);
+  assert(Array.isArray(rule.install_metadata_fields), `${rule.id} needs install_metadata_fields`);
+}
+
+assert(primarySecondaryData.principles.some((principle) => principle.includes("at most one Primary Tool")), "primary-secondary rules must limit the primary tool");
+nonEmptyArray(primarySecondaryData.patterns, "primary-secondary patterns");
+for (const pattern of primarySecondaryData.patterns) {
+  nonEmptyArray(pattern.signals, `${pattern.id}.signals`);
+  for (const field of ["primary_tool", "secondary_tool", "reason", "startup_display"]) assert(typeof pattern[field] === "string" && pattern[field].trim(), `${pattern.id} needs ${field}`);
+}
+
+const installFields = ["plugin_id", "display_name", "type", "short_description", "install_url", "marketplace_url", "codex_deeplink", "docs_url", "required_plan", "required_workspace_permission", "required_apps", "required_app_permissions", "supported_surfaces", "install_status", "install_button_label", "fallback_instruction", "last_verified_at"];
+assert(installRegistrySchema.type === "object", "plugin install registry schema must describe an object");
+assert(installFields.every((field) => Object.hasOwn(installRegistrySchema.properties, field)), "plugin install registry schema fields are incomplete");
+
 const expectedExamples = ["tiny-prompt-task.md", "small-code-task.md", "github-pr-task.md", "figma-to-react-task.md", "pdf-batch-task.md", "spreadsheet-analysis-task.md", "writing-task.md", "calendar-email-workflow.md", "vague-task.md", "video-prompt-task.md"];
 for (const example of expectedExamples) assert(existsSync(resolve(root, "examples", example)), `missing required example: ${example}`);
 
-console.log(`SkillScout data is valid: ${categoryNames.length} categories, ${projectTypes.length} recommendation rules, ${antiRulesData.rules.length} anti-recommendation rules, and ${expectedExamples.length} examples.`);
+const inlineExamples = ["native-video-prompt.md", "figma-react.md", "github-pr.md", "email-polish.md", "gmail-summary.md", "drive-docs-organize.md", "vague-project.md"];
+for (const example of inlineExamples) assert(existsSync(resolve(root, "examples", "inline-startup-decisions", example)), `missing inline startup example: ${example}`);
+for (const relativePath of ["README.md", "README.zh-CN.md", "docs/continue-after-recommendation.md", "docs/test-cases.md", "docs/localization-guide.md", "prompts/startup-response-template.md", "prompts/install-card-template.md"]) {
+  assert(existsSync(resolve(root, relativePath)), `missing required project file: ${relativePath}`);
+}
+
+console.log(`SkillScout data is valid: ${categoryNames.length} categories, ${projectTypes.length} recommendation rules, ${singleBestData.rules.length} primary-tool rules, ${antiRulesData.rules.length} anti-recommendation rules, ${expectedExamples.length + inlineExamples.length} examples, and bilingual documentation.`);

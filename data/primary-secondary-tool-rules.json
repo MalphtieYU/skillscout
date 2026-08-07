@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.1.0",
+  "principles": [
+    "Each task has at most one Primary Tool.",
+    "Add a Secondary Tool only when it is required for a concrete next stage.",
+    "Do not expand Optional Tools in the startup decision.",
+    "If no source, target, or risk clearly selects a tool, default to Native Only."
+  ],
+  "priority_order": ["real_input_source", "real_output_target", "task_risk", "user_explicit_tool", "native_only_when_uncertain"],
+  "patterns": [
+    {"id":"figma-to-github","signals":["Figma","React","GitHub","PR"],"primary_tool":"Figma","secondary_tool":"GitHub","reason":"Figma is the core input; GitHub is the delivery workflow.","startup_display":"Figma + GitHub"},
+    {"id":"repo-with-image-reference","signals":["GitHub repo","screenshot","React page"],"primary_tool":"GitHub","secondary_tool":"Image / Vision","reason":"The repository is the real code source; image inspection is needed only if the screenshot is essential.","startup_display":"GitHub"},
+    {"id":"drive-sheet-report","signals":["Google Drive","Google Sheets","report"],"primary_tool":"Google Drive","secondary_tool":"Spreadsheet / Data Analysis","reason":"Drive provides the real source; spreadsheet analysis is required only for structured calculations.","startup_display":"Google Drive + Spreadsheet / Data Analysis"},
+    {"id":"native-short-content","signals":["title","caption","prompt","translation","short email"],"primary_tool":"None","secondary_tool":"None","reason":"The task is text-only and native capability is enough.","startup_display":"Codex Native Only"}
+  ]
+}

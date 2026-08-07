@@ -1,53 +1,47 @@
 ---
 name: skillscout
-description: Decide whether a Codex task needs native abilities, skills, plugins, apps, MCP servers, or no extra tools. Use when users ask which capability to use, whether a plugin is worthwhile, how to avoid unnecessary tooling, or how to start a task with the smallest safe effective workflow.
+description: Triage a Codex project at startup, choose one best plugin or native-only path, and continue the work without making the user compare tools. Use when a user invokes SkillScout, asks which capability to use for a project, or needs a low-friction tool decision before execution.
 ---
 
 # SkillScout
 
-Use the principle **Less tooling, better outcome.** Treat native Codex capability as the default, not as a fallback.
+Use SkillScout as a project-start decision layer: **@SkillScout → decide → continue**. Follow the principle **Less tooling, better outcome.**
 
-## Decision Rules
+## Startup Contract
 
-1. Decide whether the task needs an external capability before naming any tool.
-2. Recommend the smallest useful tool stack; do not recommend tools merely because they exist.
-3. Prefer **Native Only** for writing, translation, brainstorming, prompt writing, pasted-content analysis, small code fixes, and simple static pages unless the user asks to act on a real external system or file.
-4. Recommend GitHub only for an actual repository workflow: reading or changing a repo, issues, commits, PRs, reviews, or CI.
-5. Recommend Figma only when a real design file, design system, or design-to-code task is involved.
-6. Recommend Gmail, Calendar, cloud storage, file tools, or MCP only when the task must access or change real external data, files, services, or private systems.
-7. Include permission and safety guidance whenever a recommended tool can read private data or perform write actions.
-8. Ask questions only when the answers would materially change the tooling decision. Ask no more than five.
-9. End every recommendation with a copy-ready Codex prompt.
+When invoked with a project request, start with a short tool decision of three to six lines using `prompts/startup-response-template.md`. Then continue the user's project immediately.
 
-## Workflow
+- Choose one default best option: native Codex, one primary tool, or the smallest justified pair.
+- Do not ask the user to choose among plugins unless the project cannot proceed without that choice.
+- Do not show a long scoring report at startup.
+- If no plugin is needed, say so once and begin the requested work.
+- If a recommended tool is unavailable, provide conservative install guidance and complete every part that does not depend on that tool.
 
-1. Restate the task in plain language and assign a confidence level: High, Medium, or Low.
-2. Estimate task complexity with `data/task-complexity-rules.json`.
-3. Check `data/anti-recommendation-rules.json` before considering tools. If a rule matches, prefer its native-first conclusion unless the user explicitly needs the stated escalation condition.
-4. Score the likely tool stack with `data/tool-decision-framework.json`: quality gain, efficiency gain, capability requirement, complexity cost, risk cost, and user skill fit.
-5. Choose exactly one decision: **Use Codex Native Only**, **Plugins Optional**, **Plugins Strongly Recommended**, **Plugins Required for Best Result**, or **Avoid Plugins for This Task**.
-6. Use `data/minimal-tool-stack-rules.json` to select the minimum setup and identify tools to skip.
-7. Use `data/recommendation-rules.json` and `data/plugin-categories.json` only to explain relevant categories in plain language. Check current availability before naming a specific integration.
-8. If the selected stack has a matching entry in `data/permission-risk-rules.json`, include permission scope, failure modes, safe use, and whether confirmation is required.
+## Hard Rules
 
-## Output Requirements
+1. Consider Codex Native Only before any external tool.
+2. Recommend GitHub only for a real repository, issue, commit, PR, review, or CI workflow.
+3. Recommend Figma only for a real design file, design system, or design-to-code task.
+4. Recommend Gmail or Calendar only for reading, sending, scheduling, or changing real user data.
+5. Recommend MCP only for a clear external service, custom tool, database, or private system.
+6. Default to Native Only for writing, translation, brainstorming, prompt generation, pasted-content analysis, small code fixes, and simple static pages.
+7. Include concise permission and safety guidance for private data or write actions, but continue non-sensitive work.
+8. Ask questions only when an answer materially changes the first execution step.
+9. End the work with the compact summary in `prompts/recommendation-template.md` and a copy-ready next prompt when useful.
 
-Follow `prompts/recommendation-template.md`. Always include:
+## Decision Procedure
 
-- one clear tooling decision and confidence level;
-- a natural-language tradeoff explanation, not a raw score dump;
-- the minimal setup, with escalation conditions;
-- **Tools You Should Not Use for This Task**;
-- no more than three possible directions when confidence is Low;
-- risk guidance for private data or write actions; and
-- a copy-ready Codex prompt.
+1. Match `data/anti-recommendation-rules.json`; use the native path unless its escalation condition applies.
+2. Identify the real input source, then the real output target. Use `data/single-best-plugin-rules.json` to select one primary tool.
+3. Add at most one secondary tool with `data/primary-secondary-tool-rules.json`; keep optional tools out of the startup decision.
+4. Use `data/tool-decision-framework.json` only as an internal guardrail for benefit, complexity, risk, and confidence.
+5. Check `data/plugin-install-registry.schema.json` conventions before presenting an install card. Never invent links, deep links, permissions, or install status.
+6. Read `data/permission-risk-rules.json` whenever the selected tool reads private data or performs writes.
+7. Follow `docs/continue-after-recommendation.md` to continue execution whether the tool is installed, unavailable, or permission-gated.
 
-## Resource Guide
+## Output Constraints
 
-- `data/tool-decision-framework.json`: score and map tradeoffs to a decision level.
-- `data/anti-recommendation-rules.json`: prevent needless tool recommendations.
-- `data/task-complexity-rules.json`: calibrate effort, questions, and safeguards.
-- `data/minimal-tool-stack-rules.json`: choose the smallest viable stack.
-- `data/permission-risk-rules.json`: give safety guidance for connected tools.
-- `docs/plugin-explanation-style.md`: translate tool descriptions into user-centered explanations.
-- `docs/user-pain-points.md`: address common user confusion without overexplaining.
+- Name no more than one primary tool and one necessary secondary tool at startup.
+- Put optional enhancements only in the final summary.
+- When confidence is Low, start natively, name at most three possible directions, and ask only the questions that unblock the first step.
+- Use plain language and add Chinese explanations when the user writes in Chinese or asks for bilingual output.
