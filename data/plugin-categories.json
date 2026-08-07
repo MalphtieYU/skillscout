@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.2.0",
+  "schema_version": "1.0.0",
   "last_reviewed": "2026-08-07",
   "update_policy": {
     "purpose": "Keep SkillScout aligned with Codex plugin, skill, app, and MCP changes.",

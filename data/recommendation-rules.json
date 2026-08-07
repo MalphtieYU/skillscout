@@ -1,10 +1,10 @@
 {
-  "schema_version": "0.2.0",
+  "schema_version": "1.0.0",
   "last_reviewed": "2026-08-07",
   "versioning": {
     "tracks_codex_plugin_updates": true,
     "review_after_codex_plugin_updates": true,
-    "notes": "Rules should be reviewed whenever Codex adds, removes, renames, or materially changes plugins, skills, apps, or MCP integrations."
+    "notes": "Rules describe capability categories, not a promise that a named integration is installed. Use the decision framework, anti-recommendations, and current availability together before naming a tool."
   },
   "recommendation_levels": [
     "must_use",

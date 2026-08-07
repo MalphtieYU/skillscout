@@ -1,44 +1,42 @@
 # How SkillScout Works
 
-SkillScout is a recommendation skill, not a plugin marketplace clone. It helps Codex choose the smallest useful tool stack for a user task.
+SkillScout is a tooling decision system, not a recommendation engine that tries to maximize integrations. Its guiding principle is **Less tooling, better outcome.**
 
-## Decision Flow
+## Decision sequence
 
-1. Understand the user's desired outcome.
-2. Decide whether native Codex abilities are enough.
-3. Identify required capabilities, such as file access, design import, browser testing, slides, spreadsheets, image generation, or automation.
-4. Match the request to `data/recommendation-rules.json`.
-5. Use `data/plugin-categories.json` to explain categories and overuse risks.
-6. Rank tools by necessity.
-7. Produce a copy-ready Codex prompt for the next step.
+1. Understand the outcome, the user's constraints, and whether the task touches a real file, service, repository, or private system.
+2. Consider **Codex Native Only** before considering any integration.
+3. Apply anti-recommendation rules for small, text-only, pasted-content, advisory, or prompt-writing tasks.
+4. Estimate benefit (quality, efficiency, missing capability) against cost (complexity, risk, user-fit).
+5. Choose one decision level and the smallest stack that satisfies the real requirement.
+6. Explain what not to use, when to escalate, and how to act safely.
 
-## Recommendation Levels
+## Decision levels
 
-- Must-use: The task cannot be completed properly without this capability.
-- Strongly recommended: The task can be attempted without it, but quality, speed, or reliability will suffer.
-- Optional enhancement: Useful later, but not needed to start.
-- Not recommended: Likely to add complexity without solving the user's actual problem.
+| Decision | Meaning |
+| --- | --- |
+| Use Codex Native Only | Native capability is enough and extra tools add no material value. |
+| Plugins Optional | A tool can help later, but the task should begin without it. |
+| Plugins Strongly Recommended | A tool materially improves quality, speed, or reliability for the stated task. |
+| Plugins Required for Best Result | The task needs access to a real external system, file, or action that native chat cannot provide. |
+| Avoid Plugins for This Task | Tools are more likely to increase cost or risk than improve the outcome. |
 
-## Update Policy
+## How the model stays human
 
-Codex plugin and skill availability can change. SkillScout should be updated when Codex adds, removes, renames, or materially changes plugin capabilities.
+The score is a guardrail, not the response. SkillScout uses the framework to make a consistent decision, then explains the tradeoff in everyday language: what improves, what gets harder, what access is needed, and whether that is worth it for this user.
 
-When updating:
+When the request is clear, it answers directly. When a missing fact would change the decision—for example, whether a spreadsheet is pasted or stored in Drive—it asks only the few questions needed to resolve that difference.
 
-- Refresh plugin category descriptions.
-- Re-check recommendation rules against current Codex capabilities.
-- Replace outdated example outputs.
-- Prefer category names when exact plugin names are unstable.
-- Document major recommendation changes in pull requests.
+## Private data and write actions
 
-For high-stakes or current-tool recommendations, Codex should inspect the local tool list or plugin metadata before giving exact names.
+Reading or changing a mailbox, calendar, cloud file, repository, database, deployment, or local file system deserves an explicit safety note. SkillScout states the needed permission, what can go wrong, how to reduce risk, and whether user confirmation is required before a write.
 
-## Less Is More
+## Plain-language terminology
 
-SkillScout should never treat more plugins as automatically better. A good recommendation often says:
+- **Skill:** a reusable workflow or method guide for Codex.
+- **Plugin:** a packaged set of capabilities that may contain skills, apps, or templates.
+- **App:** an integration that connects Codex to an external service, data source, or action.
+- **MCP:** a protocol or channel that exposes external tools and systems to a model.
+- **AGENTS.md:** project-level instructions and rules for agents working in a repository.
 
-- "No extra plugin needed."
-- "Use only the document tool, not Figma or GitHub."
-- "Start with native Codex, add deployment tooling only when ready to publish."
-
-The best recommendation is the one that gets the user to a successful result with the least operational burden.
+These are different ways to extend a workflow; none is automatically better than native Codex.

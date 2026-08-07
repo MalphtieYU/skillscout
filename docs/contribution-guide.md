@@ -12,6 +12,7 @@ Useful contributions include:
 - Clearer Chinese explanations.
 - Corrections after Codex plugin, app, MCP, or skill updates.
 - Tests or schemas that keep the data files consistent.
+- Better anti-recommendation, risk, or minimal-stack rules supported by clear task boundaries.
 
 ## Updating For Codex Plugin Changes
 
@@ -19,10 +20,10 @@ SkillScout should track Codex plugin changes over time.
 
 When Codex plugins or skills are updated:
 
-1. Review the changed plugin descriptions and capabilities.
-2. Update `data/plugin-categories.json` if categories, risks, or examples changed.
-3. Update `data/recommendation-rules.json` if the recommended workflow changed.
-4. Update examples that mention outdated tool names or priorities.
+1. Review changed capability descriptions and availability.
+2. Update `data/plugin-categories.json` and `data/recommendation-rules.json` when categories or workflows changed.
+3. Re-check the decision, anti-recommendation, minimal-stack, and permission-risk rules for affected tasks.
+4. Update examples that mention outdated tool names, priorities, or safety boundaries.
 5. Keep recommendations conservative when exact availability is uncertain.
 
 ## Writing Rules
@@ -36,7 +37,8 @@ When Codex plugins or skills are updated:
 ## Pull Request Checklist
 
 - JSON files are valid.
-- The recommendation still follows "less is more."
+- `node scripts/validate-data.mjs` passes.
+- The recommendation still follows "Less tooling, better outcome."
 - Examples are realistic.
 - README and docs stay aligned with the data files.
 - Any Codex plugin update is reflected in the update policy or examples when relevant.

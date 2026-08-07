@@ -1,139 +1,103 @@
 # SkillScout
 
-SkillScout is a Codex skill that recommends whether a Codex task needs plugins, skills, apps, MCP servers, or no extra tools at all.
+> **Less tooling, better outcome.**
 
-It is designed for people who want to start a task in Codex but are not sure which extra capabilities are truly necessary. SkillScout favors the smallest useful tool stack, explains recommendations in plain English, and can include Chinese explanations for users who need them.
+SkillScout is a decision layer for Codex tooling. It decides when to use plugins, skills, apps, MCP servers, or no extra tools at all—then recommends the smallest useful stack.
 
-## What It Does
+It is not a plugin directory and does not assume that more integrations make a workflow better. Its first question is always: **will a tool materially improve this task for this user?**
 
-SkillScout reviews a user's project description and answers:
+## Why not always use plugins?
 
-- Can this be done with native Codex abilities?
-- Which tools are required, strongly recommended, optional, or unnecessary?
-- What is the simplest workflow to get started?
-- What happens if the user does not use a recommended tool?
-- What should the user ask Codex next?
+Plugins can add useful capabilities, but they can also add setup time, permissions, latency, context noise, and new failure points. A GitHub integration is valuable when Codex must change a real repository and open a PR; it is needless when a user only wants a five-line code fix. SkillScout makes that distinction explicit.
 
-## Why It Exists
+## Core idea
 
-Codex users often face tasks such as coding, building websites, editing documents, creating slides, analyzing spreadsheets, generating images, working with Figma, using GitHub, or running automations. Some tasks need specialized plugins or skills. Many do not.
+Use tools only when they improve the result. Start with Codex native capability, add the minimum external capability that unlocks a real need, and say clearly what to skip.
 
-SkillScout reduces choice overload by recommending only what is genuinely useful.
+## Who it is for
 
-## Who It Is For
+- Codex beginners and non-technical users who find tool descriptions confusing.
+- Developers working across many repositories, integrations, and file types.
+- Teams that want repeatable, low-risk tooling decisions.
+- Anyone who wants a plain-language explanation of Skills, Plugins, Apps, MCP, or `AGENTS.md`.
 
-- Codex users who are new to plugins and skills.
-- Non-programmers who want plain-language tool guidance.
-- Developers who want a quick workflow recommendation.
-- Teams that want consistent tool-selection guidance.
-- Bilingual users who want English-first output with Chinese explanations.
+## What SkillScout does
 
-## Features
+- Decides whether a task needs tools at all.
+- Applies a benefit, complexity, risk, and user-fit decision model.
+- Gives anti-recommendations to prevent needless plugins.
+- Identifies task complexity and recommendation confidence.
+- Selects a minimal tool stack with clear escalation conditions.
+- Explains tools in plain English and Chinese instead of copying marketplace descriptions.
+- Adds permission and safety guidance for connected data or write actions.
+- Ends with a copy-ready Codex prompt.
 
-- Decides whether extra Codex tools are needed at all.
-- Ranks tools as must-use, strongly recommended, optional, or not needed.
-- Explains each recommendation in plain English and Chinese where useful.
-- Includes reusable recommendation templates.
-- Provides structured JSON rule data for common project types.
-- Tracks plugin category metadata in an extensible format.
-- Includes an update policy so the project can evolve with Codex plugin changes.
-- Validates its rule data with a dependency-free Node.js script.
+## Example
 
-## Example Use Cases
+**User:** “I want Codex to polish this email.”
 
-- "I want to build a personal portfolio website. Which Codex plugins do I need?"
-- "I need to turn a Figma design into a responsive React website."
-- "I need Codex to refactor my GitHub repo and open a pull request."
-- "I need to watermark 50 PDF files and export final versions."
+**Decision:** Use Codex Native Only — High Confidence.
 
-## Installation / Usage Idea
+Polishing pasted text does not need account access. Gmail would only be useful if the user wants Codex to read a real thread, draft a reply in the mailbox, or send it. Connecting Gmail here would add privacy and permission overhead without improving the writing.
 
-Use this repository as a Codex skill folder:
+**Minimal setup:** Codex native writing.
 
-1. Clone the repository into your Codex skills directory and keep the folder name `skillscout`.
-2. Ask Codex a tool-selection question, such as:
+**Tools you should not use:** Gmail, Calendar, GitHub, Figma, and MCP. None of them improve a text-only rewrite.
+
+## How it works
+
+1. Interpret the requested outcome and assess confidence.
+2. Check for a native-first or anti-recommendation rule.
+3. Estimate quality, efficiency, capability, complexity, risk, and user-fit tradeoffs.
+4. Select one tooling decision and the smallest viable stack.
+5. Add safeguards for data access or write actions.
+6. Give a copy-ready next prompt.
+
+See [how it works](docs/how-it-works.md), the [decision framework](data/tool-decision-framework.json), and the [full response template](prompts/recommendation-template.md).
+
+## Install
+
+Copy or clone this folder as `skillscout` into your Codex skills directory (commonly `$CODEX_HOME/skills/skillscout`), then refresh Codex. Invoke it with:
 
 ```text
-Use $skillscout to recommend the smallest useful Codex tool stack for my project:
-I need to create a quarterly sales deck from spreadsheet data.
+Use $skillscout to recommend the smallest safe tool stack for my task.
 ```
 
-3. Review the recommendation before installing or enabling extra plugins.
+## Validate
 
-For a local checkout, the typical destination is `$CODEX_HOME/skills/skillscout` (or the skills directory configured by your Codex environment). Restart or refresh Codex after installing a new skill so it can discover the folder.
-
-## Repository Layout
-
-| Path | Purpose |
-| --- | --- |
-| `SKILL.md` | Trigger metadata and the concise decision workflow Codex follows. |
-| `agents/openai.yaml` | Display metadata and a starter prompt for the Codex UI. |
-| `data/` | Versioned categories and task-to-tool recommendation rules. |
-| `examples/` | Representative recommendations for common project types. |
-| `prompts/` | Reusable system and response templates. |
-| `docs/` | Maintenance and contribution guidance. |
-| `scripts/validate-data.mjs` | Validates JSON structure and category references. |
-
-## Example Output
-
-```markdown
-# SkillScout Recommendation
-
-## Tool Need Assessment
-
-Strongly recommended. This task needs slide generation and spreadsheet handling. Figma, image generation, and deployment tools are probably unnecessary.
-
-## Recommended Setup
-
-| Tool / Skill / Plugin | Priority | Why it helps | Required or optional | Chinese explanation |
-| --- | --- | --- | --- | --- |
-| Spreadsheets | Strongly recommended | Cleans and summarizes the source data | Optional but useful | 用来整理和分析表格数据 |
-| Presentations | Strongly recommended | Builds the final slide deck | Optional but useful | 用来生成可编辑的演示文稿 |
-```
-
-## Validate Before Contributing
-
-Run the following command from the repository root:
+Run from the repository root:
 
 ```text
 node scripts/validate-data.mjs
 ```
 
-The validator checks both JSON files, requires unique category and project-type names, and confirms that every rule references a defined category.
+The validator checks the decision data, cross-file category references, risk coverage, and example inventory.
 
-## Keeping Up With Codex Updates
+## Repository layout
 
-SkillScout should evolve as Codex plugins, apps, MCP servers, and built-in skills change. The data files include `versioning` and `update_policy` fields to make this explicit.
-
-Recommended maintenance rhythm:
-
-- Review available Codex plugins and skills after major Codex plugin updates.
-- Update `data/plugin-categories.json` when new categories or capabilities appear.
-- Update `data/recommendation-rules.json` when task-to-tool guidance changes.
-- Refresh examples when a better default workflow becomes available.
-- Note meaningful changes in release notes or pull requests.
-
-See `docs/update-policy.md` for the maintenance workflow.
+| Path | Purpose |
+| --- | --- |
+| `SKILL.md` | Concise runtime decision workflow. |
+| `data/` | Versioned models, rules, and a future plugin-registry schema. |
+| `docs/` | Human-facing explanation, maintenance, and contribution guidance. |
+| `examples/` | End-to-end decisions for common and ambiguous tasks. |
+| `prompts/` | System and response templates. |
+| `scripts/validate-data.mjs` | Dependency-free validation. |
 
 ## Roadmap
 
-- Add a lightweight rule-checking CLI.
-- Add real plugin marketplace import adapters when stable metadata is available.
-- Add multilingual output templates beyond English and Chinese.
-- Add a scheduled review checklist for Codex plugin update cycles.
+- Live plugin-directory indexing.
+- Community plugin ratings.
+- Broader multilingual explanations.
+- Local plugin registry support.
+- Team policy profiles.
+- Security scoring refinements.
+- Integration with the Codex plugin directory.
 
 ## Contributing
 
-Contributions are welcome. Please read `docs/contribution-guide.md` before opening a pull request.
-
-Good contributions include:
-
-- New project-type rules.
-- Clearer examples for non-programmers.
-- Updated plugin category metadata.
-- Better guidance for avoiding tool overuse.
-- Changes that keep SkillScout aligned with current Codex plugin capabilities.
+Read [the contribution guide](docs/contribution-guide.md). Contributions should make decisions clearer, safer, or more useful—not merely add more tools.
 
 ## License
 
-MIT. See `LICENSE`.
+MIT. See [LICENSE](LICENSE).

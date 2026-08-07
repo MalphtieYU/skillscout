@@ -1,53 +1,57 @@
 # SkillScout Recommendation
 
-## 1. Project Understanding
+## 1. My Read of Your Task
 
-Summarize the user's project in simple language.
+Restate the user's goal in plain language.
 
-## 2. Does this project need plugins or skills?
+**Confidence:** High / Medium / Low Confidence
 
-Choose one:
+## 2. Tooling Decision
 
-- No extra plugin needed
-- Optional enhancement only
-- Strongly recommended
-- Required for best result
+Choose exactly one:
 
-Briefly explain why.
+- Use Codex Native Only
+- Plugins Optional
+- Plugins Strongly Recommended
+- Plugins Required for Best Result
+- Avoid Plugins for This Task
 
-## 3. Recommended Tool Stack
+Explain the decision in two to four natural sentences. Do not expose raw scores unless the user asks for them.
 
-| Tool / Skill / Plugin | Priority | Why it helps | Required or optional | Chinese explanation |
-| --- | --- | --- | --- | --- |
-| Tool name or category | Must-use / Strong / Optional | Plain English reason | Required / Optional | 中文解释 |
+## 3. Why This Decision
 
-## 4. Tools You Probably Do Not Need
+Explain naturally:
 
-List tools or categories that would add complexity without helping this project.
+- whether tools improve output quality;
+- whether they save meaningful time;
+- whether they add complexity or setup burden;
+- whether permissions or accidental changes are a concern; and
+- whether the tradeoff is worthwhile for this user and task.
 
-## 5. Best Workflow
+## 4. Recommended Minimal Setup
 
-1. Start with the minimum useful setup.
-2. Complete the first concrete deliverable.
-3. Add optional tools only when the project clearly needs them.
+| Tool / Plugin / Skill | Priority | Why it helps | Use it when | Skip it when | Plain-language explanation | 中文解释 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Native Codex or a relevant capability | Required / Optional | Concise reason | Clear trigger | Clear boundary | User-centered explanation | 中文解释 |
 
-## 6. Copy-ready Codex Prompt
+Include only the minimum needed tools. Add optional tools only with a specific escalation condition.
+
+## 5. Tools You Should Not Use for This Task
+
+List unneeded tools and why they would add complexity without improving the result. If none need to be named, say so plainly.
+
+## 6. Better Workflow
+
+Give the least-effort safe workflow in no more than six steps.
+
+## 7. Copy-ready Codex Prompt
 
 ```text
-Use the smallest useful tool stack for this task:
-[paste the user's project here]
-
-First tell me whether extra Codex plugins, skills, apps, or MCP servers are needed.
-Then recommend must-use, strongly recommended, optional, and unnecessary tools.
-Keep the workflow simple.
+Write a focused next prompt that uses the selected minimal setup and states any safety boundary.
 ```
 
-## 7. Questions Before Starting
+## 8. Ask These First if Unclear
 
-Ask no more than five questions if the project is ambiguous:
+If the information is sufficient, write: **No extra questions needed.**
 
-1. What is the final deliverable?
-2. Do you need current internet information?
-3. Do you need local files or external accounts?
-4. Do you need to generate documents, slides, spreadsheets, images, websites, or video?
-5. Do you need automation or scheduled follow-ups?
+Otherwise ask at most five questions that would materially change the tooling decision.

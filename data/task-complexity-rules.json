@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "levels": [
+    {
+      "level": 1,
+      "name": "Tiny Task",
+      "examples": ["Write a prompt", "Polish copy", "Explain a concept", "Write a small script", "Fix a short code snippet"],
+      "default_decision": "Avoid Plugin or Native Only",
+      "guidance": "Answer directly; do not add tools unless a real external action is explicitly requested."
+    },
+    {
+      "level": 2,
+      "name": "Small Project",
+      "examples": ["Simple website", "Small scraper", "Single-file utility", "Short document"],
+      "default_decision": "Native Only; tools are optional",
+      "guidance": "Start natively and add a tool only for a specific file, design, hosting, or collaboration need."
+    },
+    {
+      "level": 3,
+      "name": "Medium Project",
+      "examples": ["Multi-page website", "Existing repository change", "PDF batch work", "Spreadsheet analysis", "PPT generation"],
+      "default_decision": "Decide from external-file and service needs",
+      "guidance": "Recommend a minimal tool stack when it materially improves format handling, access, or verification."
+    },
+    {
+      "level": 4,
+      "name": "Complex Project",
+      "examples": ["Full-stack application", "Figma-to-code", "Automation workflow", "Multi-tool collaboration", "Private-data analysis"],
+      "default_decision": "Strongly Recommended or Required for Best Result",
+      "guidance": "Sequence tools deliberately, explain dependencies, and avoid adding integrations that do not serve a concrete stage."
+    },
+    {
+      "level": 5,
+      "name": "Sensitive / High-risk Project",
+      "examples": ["Mailbox or calendar action", "Customer or financial data", "Production database", "Bulk deletion", "Write-permission automation"],
+      "default_decision": "Risk warning and confirmation required",
+      "guidance": "State permissions, likely failures, a reversible plan, and confirmation points before any write action."
+    }
+  ]
+}

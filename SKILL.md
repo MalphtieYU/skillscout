@@ -1,134 +1,53 @@
 ---
 name: skillscout
-description: Recommend the smallest useful Codex tool stack: native abilities, skills, plugins, apps, MCP servers, or no extra tools. Use when a user asks which Codex capability to use, whether a task needs extra tools, how to choose between tools, how to avoid unnecessary plugins, or how to start a project with a simple effective workflow.
+description: Decide whether a Codex task needs native abilities, skills, plugins, apps, MCP servers, or no extra tools. Use when users ask which capability to use, whether a plugin is worthwhile, how to avoid unnecessary tooling, or how to start a task with the smallest safe effective workflow.
 ---
 
 # SkillScout
 
-SkillScout helps Codex decide whether a user's task needs plugins, skills, apps, MCP servers, or no extra tools at all.
+Use the principle **Less tooling, better outcome.** Treat native Codex capability as the default, not as a fallback.
 
-Use it to reduce tool-choice friction. The goal is not to recommend more tools; the goal is to recommend the smallest setup that can complete the work well.
+## Decision Rules
 
-## Core Principles
-
-1. Decide whether extra tools are needed before naming tools.
-2. Prefer no plugin when Codex native abilities are enough.
-3. Rank recommendations by necessity: must-use, strongly recommended, optional enhancement, not recommended.
-4. Explain each recommendation in plain English and, when useful, Chinese.
-5. State the consequence of not using a recommended tool.
-6. Give the minimum viable tool stack, not a maximal stack.
-7. Ask only the minimum clarifying questions when the project description is too vague to assess.
-8. Treat tool availability as current-state information: inspect the available skills, apps, or plugin list before naming a specific integration when availability matters.
+1. Decide whether the task needs an external capability before naming any tool.
+2. Recommend the smallest useful tool stack; do not recommend tools merely because they exist.
+3. Prefer **Native Only** for writing, translation, brainstorming, prompt writing, pasted-content analysis, small code fixes, and simple static pages unless the user asks to act on a real external system or file.
+4. Recommend GitHub only for an actual repository workflow: reading or changing a repo, issues, commits, PRs, reviews, or CI.
+5. Recommend Figma only when a real design file, design system, or design-to-code task is involved.
+6. Recommend Gmail, Calendar, cloud storage, file tools, or MCP only when the task must access or change real external data, files, services, or private systems.
+7. Include permission and safety guidance whenever a recommended tool can read private data or perform write actions.
+8. Ask questions only when the answers would materially change the tooling decision. Ask no more than five.
+9. End every recommendation with a copy-ready Codex prompt.
 
 ## Workflow
 
-1. Restate the user's project in simple language.
-2. Check whether the project can be completed well with native Codex abilities.
-3. Identify hard requirements: external account access, a specific file format, a live application, current web information, or a requested deliverable in a connected service.
-4. If the request is vague, ask up to five high-signal questions before recommending tools.
-5. Match the task against `data/recommendation-rules.json` when it is available.
-6. Use `data/plugin-categories.json` for category explanations and overuse risks.
-7. Separate recommendations into:
-   - Must-use Tools
-   - Strongly Recommended Tools
-   - Optional Enhancements
-   - Tools Not Needed
-8. State any availability or access assumption, then include a copy-ready Codex prompt that starts the user's next step.
+1. Restate the task in plain language and assign a confidence level: High, Medium, or Low.
+2. Estimate task complexity with `data/task-complexity-rules.json`.
+3. Check `data/anti-recommendation-rules.json` before considering tools. If a rule matches, prefer its native-first conclusion unless the user explicitly needs the stated escalation condition.
+4. Score the likely tool stack with `data/tool-decision-framework.json`: quality gain, efficiency gain, capability requirement, complexity cost, risk cost, and user skill fit.
+5. Choose exactly one decision: **Use Codex Native Only**, **Plugins Optional**, **Plugins Strongly Recommended**, **Plugins Required for Best Result**, or **Avoid Plugins for This Task**.
+6. Use `data/minimal-tool-stack-rules.json` to select the minimum setup and identify tools to skip.
+7. Use `data/recommendation-rules.json` and `data/plugin-categories.json` only to explain relevant categories in plain language. Check current availability before naming a specific integration.
+8. If the selected stack has a matching entry in `data/permission-risk-rules.json`, include permission scope, failure modes, safe use, and whether confirmation is required.
 
-## Output Template
+## Output Requirements
 
-Use this structure for final recommendations:
+Follow `prompts/recommendation-template.md`. Always include:
 
-```markdown
-# SkillScout Recommendation
+- one clear tooling decision and confidence level;
+- a natural-language tradeoff explanation, not a raw score dump;
+- the minimal setup, with escalation conditions;
+- **Tools You Should Not Use for This Task**;
+- no more than three possible directions when confidence is Low;
+- risk guidance for private data or write actions; and
+- a copy-ready Codex prompt.
 
-## Project Understanding
+## Resource Guide
 
-Summarize the user's project in simple language.
-
-## Tool Need Assessment
-
-Choose one:
-
-- No extra plugin needed
-- Optional enhancement only
-- Strongly recommended
-- Required for best result
-
-Explain the decision briefly.
-
-## Recommended Setup
-
-State the smallest useful tool stack.
-
-## Must-use Tools
-
-List only tools that are required for the requested result.
-
-## Strongly Recommended Tools
-
-List tools that materially improve quality, access, reliability, or speed.
-
-## Optional Enhancements
-
-List tools that may help but are not needed to start.
-
-## Tools Not Needed
-
-Name tools/categories that would add complexity without clear value.
-
-## Why This Combination
-
-Explain why this is enough and why extra tools are avoided.
-
-## Suggested Codex Prompt
-
-Provide a copy-ready prompt.
-
-## Next Questions if Needed
-
-Ask up to five questions only if the recommendation depends on missing information.
-```
-
-## Recommendation Details
-
-For each recommended plugin, skill, app, or MCP server, include:
-
-- Name
-- Original English description, if known
-- Chinese explanation
-- Problems it solves
-- Why this project needs it
-- Impact of not using it
-- Required or optional
-- Priority
-- Suggested invocation or workflow
-
-When a specific capability is not available in the current environment, recommend its category and state the fallback. Do not tell the user to install a plugin unless the task genuinely needs it and the capability is unavailable.
-
-## Resource Use
-
-- Read `data/recommendation-rules.json` when matching a common project type.
-- Read `data/plugin-categories.json` when explaining a category, risk, or tool-overuse tradeoff.
-- Use `prompts/recommendation-template.md` when a consistent full recommendation is useful.
-- Use `examples/` only when a similar example improves clarity; do not copy an example blindly.
-
-## Update Awareness
-
-Codex plugins, apps, MCP servers, and built-in skills can change over time. When accuracy depends on current availability:
-
-- Check local skill/plugin metadata first when accessible.
-- Search or inspect the current Codex tool/plugin list if the environment exposes it.
-- Mark uncertain recommendations as "category-level" instead of pretending a specific plugin is guaranteed.
-- Update `data/plugin-categories.json`, `data/recommendation-rules.json`, examples, and README when Codex plugin capabilities change.
-
-## Vague Request Questions
-
-If the task is unclear, ask the smallest useful set of questions:
-
-- What is the final deliverable?
-- Do you need internet access or latest information?
-- Do you need to read or write local files?
-- Do you need images, slides, PDFs, spreadsheets, web pages, or video?
-- Do you need to connect GitHub, Google Drive, Gmail, Slack, Notion, or another external service?
-- Do you need automation or scheduled work?
+- `data/tool-decision-framework.json`: score and map tradeoffs to a decision level.
+- `data/anti-recommendation-rules.json`: prevent needless tool recommendations.
+- `data/task-complexity-rules.json`: calibrate effort, questions, and safeguards.
+- `data/minimal-tool-stack-rules.json`: choose the smallest viable stack.
+- `data/permission-risk-rules.json`: give safety guidance for connected tools.
+- `docs/plugin-explanation-style.md`: translate tool descriptions into user-centered explanations.
+- `docs/user-pain-points.md`: address common user confusion without overexplaining.
