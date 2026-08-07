@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0.0",
+  "name": "SkillScout Tool Decision Framework",
+  "principle": "Less tooling, better outcome.",
+  "scoring_scale": {
+    "minimum": 0,
+    "maximum": 3,
+    "instruction": "Score the likely minimal external tool stack, not every tool the user could possibly install."
+  },
+  "dimensions": [
+    {
+      "id": "output_quality_gain",
+      "label": "Output Quality Gain",
+      "kind": "benefit",
+      "question": "Would using the tool materially improve the final result?",
+      "scores": {
+        "0": "No meaningful improvement.",
+        "1": "Slight improvement.",
+        "2": "Clear improvement.",
+        "3": "Matching the result is difficult without the tool."
+      }
+    },
+    {
+      "id": "efficiency_gain",
+      "label": "Efficiency Gain",
+      "kind": "benefit",
+      "question": "Would the tool save meaningful time or repeated effort?",
+      "scores": {
+        "0": "No time saved, or the tool is slower.",
+        "1": "Small time saving.",
+        "2": "Clear time saving.",
+        "3": "The task is highly inefficient without the tool."
+      }
+    },
+    {
+      "id": "capability_requirement",
+      "label": "Capability Requirement",
+      "kind": "benefit",
+      "question": "Does the task require a capability outside native Codex?",
+      "scores": {
+        "0": "Native Codex is sufficient.",
+        "1": "External capability is optional.",
+        "2": "External capability is recommended.",
+        "3": "The task must access a real file, service, database, design, mailbox, calendar, repository, PDF, or spreadsheet."
+      }
+    },
+    {
+      "id": "complexity_cost",
+      "label": "Complexity Cost",
+      "kind": "cost",
+      "question": "How much setup, configuration, failure handling, or learning burden does the tool add?",
+      "scores": {
+        "0": "Almost no extra complexity.",
+        "1": "Small added complexity.",
+        "2": "Noticeable setup or operational complexity.",
+        "3": "Heavy authorization, configuration, failure, or learning cost."
+      }
+    },
+    {
+      "id": "risk_cost",
+      "label": "Risk Cost",
+      "kind": "cost",
+      "question": "What privacy, security, accidental-write, data-loss, or service-impact risk does the tool introduce?",
+      "scores": {
+        "0": "Very low risk.",
+        "1": "Manageable risk.",
+        "2": "Needs an explicit user reminder.",
+        "3": "High risk; avoid or require safeguards and confirmation."
+      }
+    },
+    {
+      "id": "user_skill_fit",
+      "label": "User Skill Fit",
+      "kind": "cost",
+      "question": "How difficult is it for this user to understand and use the tool correctly?",
+      "scores": {
+        "0": "Easy for a non-technical user.",
+        "1": "Needs a short explanation.",
+        "2": "Needs substantial guidance.",
+        "3": "Easy to misunderstand or misuse."
+      }
+    }
+  ],
+  "calculation": {
+    "benefit_score": "output_quality_gain + efficiency_gain + capability_requirement",
+    "cost_score": "complexity_cost + risk_cost + user_skill_fit",
+    "net_value": "benefit_score - cost_score",
+    "note": "Use the thresholds as a decision aid. Capability and safety overrides take precedence over arithmetic."
+  },
+  "decision_levels": [
+    {
+      "level": "Native Only",
+      "when": "capability_requirement is 0 and benefit_score is 4 or less, or an anti-recommendation rule matches without an escalation condition",
+      "meaning": "No plugin is needed. Use Codex native ability directly."
+    },
+    {
+      "level": "Optional Enhancement",
+      "when": "net_value is 0 or greater but no external capability is required",
+      "meaning": "A tool can help later, but the task should start without it."
+    },
+    {
+      "level": "Strongly Recommended",
+      "when": "benefit_score is 5 or greater, net_value is 2 or greater, and a tool materially improves quality, speed, or reliability",
+      "meaning": "Use the minimal relevant tool stack for the stated task."
+    },
+    {
+      "level": "Required for Best Result",
+      "when": "capability_requirement is 3 and the task must read, write, or act on a real external system or structured file",
+      "meaning": "Native chat cannot complete the requested real-world action alone."
+    },
+    {
+      "level": "Avoid Plugin",
+      "when": "risk_cost is 3 without a clear safety plan, or cost_score exceeds benefit_score, or a tool does not improve the requested outcome",
+      "meaning": "Do not add the tool; explain the safer native alternative."
+    }
+  ],
+  "confidence": {
+    "high": "The outcome, source material, and requested action are clear.",
+    "medium": "The outcome is clear but one detail could change the stack.",
+    "low": "The task, deliverable, source, or required action is too vague. Ask targeted questions before a detailed recommendation."
+  },
+  "safety_overrides": [
+    "When an external tool can write, delete, send, deploy, or change private data, add a risk warning regardless of score.",
+    "When the user only wants advice, an explanation, or work on pasted content, do not recommend a connected integration by default.",
+    "When confidence is low, provide no more than three possible directions before asking questions."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "Require safety guidance whenever a recommended capability can access private data or make external changes.",
+  "rules": [
+    {"tool_category":"Email","permission":"Read mailbox content; draft or send messages.","what_can_go_wrong":"Private content may be exposed or a message may be sent to the wrong recipient.","safe_use":"Start read-only, summarize before acting, and ask before sending.","confirmation_required":true},
+    {"tool_category":"Calendar","permission":"Read, create, modify, or delete calendar events.","what_can_go_wrong":"Meetings can be changed, duplicated, or scheduled at the wrong time.","safe_use":"Confirm the event details and time zone before any write.","confirmation_required":true},
+    {"tool_category":"Cloud Storage","permission":"Read, share, organize, modify, or delete private cloud files.","what_can_go_wrong":"Sensitive files can be exposed, overwritten, moved, or deleted.","safe_use":"Inspect scope first, use copies or dry-runs where possible, and confirm destructive changes.","confirmation_required":true},
+    {"tool_category":"GitHub","permission":"Read repositories and write branches, commits, pull requests, issues, or workflow changes.","what_can_go_wrong":"Code can be changed on the wrong branch, secrets exposed, or production workflows affected.","safe_use":"Inspect the repository and diff, use a focused branch, run checks, and confirm before pushing or opening a PR.","confirmation_required":true},
+    {"tool_category":"MCP / Database","permission":"Access private systems, data, or custom read and write actions.","what_can_go_wrong":"Sensitive data can be queried, changed, or leaked; custom writes can have broad impact.","safe_use":"Use least privilege, identify read versus write actions, test safely, and obtain explicit confirmation for writes.","confirmation_required":true},
+    {"tool_category":"Files & Documents","permission":"Read, move, rename, modify, export, or delete local files.","what_can_go_wrong":"Files can be overwritten, misplaced, or changed in bulk.","safe_use":"Confirm paths and targets, test on a sample, and use recoverable or copied outputs where practical.","confirmation_required":true},
+    {"tool_category":"Automation","permission":"Create recurring actions, reminders, monitors, or connected writes.","what_can_go_wrong":"An incorrect task can repeat, create noise, or repeatedly change external state.","safe_use":"Define trigger, scope, stop condition, and notification behavior before enabling it.","confirmation_required":true},
+    {"tool_category":"Deployment","permission":"Change hosting, configuration, infrastructure, or production services.","what_can_go_wrong":"A release can cause downtime, expose configuration, or affect users.","safe_use":"Review environment targets, use staging when available, and keep rollback instructions before production deployment.","confirmation_required":true}
+  ]
+}

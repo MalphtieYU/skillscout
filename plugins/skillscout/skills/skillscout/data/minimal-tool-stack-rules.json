@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "principle": "Recommend the smallest stack that completes the requested outcome; list optional tools only with an escalation trigger.",
+  "stacks": [
+    {
+      "id": "write-a-website",
+      "signals": ["write a website", "build a website", "simple website", "landing page"],
+      "minimal_setup": ["Codex Native Only"],
+      "optional_when": {"GitHub": "the user wants repository collaboration", "Deployment": "the user is ready to publish", "Figma": "a real design file is the source of truth"},
+      "avoid_by_default": ["MCP", "PDF", "Spreadsheets", "Email"]
+    },
+    {
+      "id": "figma-react",
+      "signals": ["Figma to React", "implement this Figma", "design-to-code"],
+      "minimal_setup": ["Figma", "Codex Native Coding"],
+      "optional_when": {"GitHub": "the implementation must be committed or reviewed"},
+      "avoid_by_default": ["PDF", "Email", "Calendar"]
+    },
+    {
+      "id": "github-pr",
+      "signals": ["modify GitHub repo", "open a PR", "commit and push", "review CI"],
+      "minimal_setup": ["GitHub", "Codex Native Coding"],
+      "recommended": ["Testing"],
+      "optional_when": {"Security": "the change affects authentication, secrets, dependencies, or production risk"},
+      "avoid_by_default": ["Figma", "Slides", "Email"]
+    },
+    {
+      "id": "google-drive-documents",
+      "signals": ["organize Google Drive", "edit Google Docs", "shared Drive files"],
+      "minimal_setup": ["Google Drive / Docs"],
+      "optional_when": {"Spreadsheets": "the documents include structured tabular data"},
+      "avoid_by_default": ["GitHub", "Figma", "Images"]
+    },
+    {
+      "id": "excel-sales-analysis",
+      "signals": ["sales Excel", "upload Excel", "analyze spreadsheet", "XLSX analysis"],
+      "minimal_setup": ["Spreadsheet / Data Analysis"],
+      "optional_when": {"Report / Visualization": "the user needs a shareable report or chart"},
+      "avoid_by_default": ["GitHub", "Figma", "Email"]
+    },
+    {
+      "id": "video-prompt",
+      "signals": ["video generation prompt", "AI video prompt", "write a video prompt"],
+      "minimal_setup": ["Codex Native Only"],
+      "optional_when": {"Video tooling": "the user asks to render, edit, caption, or batch-process media"},
+      "avoid_by_default": ["Image generation", "GitHub", "Figma"]
+    }
+  ]
+}

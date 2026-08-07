@@ -70,12 +70,24 @@ SkillScout 会：
 使用 $skillscout 为我的项目选择最佳启动方案，并直接继续执行。
 ```
 
+### 通过 GitHub marketplace 安装为 Codex 插件
+
+本仓库已提供公开的 Codex marketplace 来源。使用新版 Codex CLI 时可以执行：
+
+```text
+codex plugin marketplace add MalphtieYU/skillscout
+codex plugin add skillscout@skillscout-marketplace
+```
+
+安装后请重启 Codex 或新开一个对话。这个 GitHub marketplace 已可使用；进入 ChatGPT/Codex 通用插件目录仍需通过 OpenAI 的单独审核。
+
 ## 验证
 
 在仓库根目录运行：
 
 ```text
 node scripts/validate-data.mjs
+node scripts/validate-plugin-package.mjs
 ```
 
 脚本会检查 JSON 结构、规则覆盖、案例清单和启动模板。行为测试见 [测试用例](docs/test-cases.md)。
@@ -84,6 +96,10 @@ node scripts/validate-data.mjs
 
 `data/plugin-install-registry.schema.json` 预留了真实安装链接、应用权限、支持的 Codex 端与管理员要求等字段。它并不表示当前一定支持一键安装或 `codex://` 深链接；没有验证入口时，SkillScout 只会提示用户到插件面板搜索。
 
+## 公开插件状态
+
+SkillScout 现已打包为仅含 Skill 的插件，并通过这个公开 GitHub marketplace 分发。通用 Plugins Directory 的上架尚未完成：OpenAI 还要求已验证的发布者身份、Apps Management 写权限、公开的支持/隐私/条款页面、可供审核的启动提示词，以及至少 5 条正向和 3 条负向测试用例。
+
 ## 贡献
 
 阅读 [贡献指南](docs/contribution-guide.md)。欢迎改进决策质量、边界、安全性和表达清晰度，而不是单纯增加工具数量。
@@ -91,4 +107,3 @@ node scripts/validate-data.mjs
 ## 许可证
 
 MIT。见 [LICENSE](LICENSE)。
-

@@ -1,0 +1,263 @@
+{
+  "schema_version": "1.0.0",
+  "last_reviewed": "2026-08-07",
+  "update_policy": {
+    "purpose": "Keep SkillScout aligned with Codex plugin, skill, app, and MCP changes.",
+    "recommended_review_triggers": [
+      "Codex plugin marketplace update",
+      "New built-in skill category",
+      "Plugin rename, removal, or capability change",
+      "New MCP server type becomes commonly available"
+    ],
+    "maintenance_notes": [
+      "Prefer category-level guidance when exact plugin availability is uncertain.",
+      "Review examples after major Codex plugin updates.",
+      "Update Chinese explanations when category behavior changes."
+    ]
+  },
+  "categories": [
+    {
+      "category_name": "Code & Repo",
+      "plain_english_description": "General coding, refactoring, local repository work, and command-line development.",
+      "chinese_description": "用于写代码、重构、本地仓库修改和命令行开发。",
+      "when_to_use": ["Writing code", "Editing a local project", "Running tests", "Refactoring"],
+      "when_not_to_use": ["The task is only writing text", "The user only needs a recommendation"],
+      "example_tasks": ["Fix a bug", "Add a React component", "Refactor a Python module"],
+      "risk_of_overuse": "May be unnecessary for pure planning, translation, or short writing tasks."
+    },
+    {
+      "category_name": "GitHub",
+      "plain_english_description": "Repository hosting, issues, pull requests, branches, and remote collaboration.",
+      "chinese_description": "用于 GitHub 仓库、Issue、PR、分支和远程协作。",
+      "when_to_use": ["Open a pull request", "Review issues", "Sync remote repository"],
+      "when_not_to_use": ["Only local files are involved", "No remote repository action is needed"],
+      "example_tasks": ["Create a PR", "Comment on an issue", "Inspect repository history"],
+      "risk_of_overuse": "Adds account and permission complexity when local edits are enough."
+    },
+    {
+      "category_name": "Browser / Web",
+      "plain_english_description": "Browser inspection, web app testing, screenshots, and live page debugging.",
+      "chinese_description": "用于浏览器检查、网页测试、截图和前端调试。",
+      "when_to_use": ["Test responsive UI", "Debug console errors", "Capture a web page"],
+      "when_not_to_use": ["No rendered web page exists", "Only backend code is changing"],
+      "example_tasks": ["Check mobile layout", "Verify a form", "Inspect browser errors"],
+      "risk_of_overuse": "Can slow down simple code edits that do not require visual verification."
+    },
+    {
+      "category_name": "Files & Documents",
+      "plain_english_description": "Reading, editing, organizing, and exporting local document files.",
+      "chinese_description": "用于读取、编辑、整理和导出本地文档文件。",
+      "when_to_use": ["Edit DOCX", "Organize folders", "Batch rename files"],
+      "when_not_to_use": ["The user only needs advice", "Files are not available"],
+      "example_tasks": ["Edit a Word document", "Summarize local notes", "Create a folder structure"],
+      "risk_of_overuse": "May be unnecessary for short text generated directly in chat."
+    },
+    {
+      "category_name": "PDF",
+      "plain_english_description": "PDF extraction, conversion, watermarking, merging, splitting, and form handling.",
+      "chinese_description": "用于 PDF 提取、转换、加水印、合并、拆分和表单处理。",
+      "when_to_use": ["Batch PDF processing", "Extract PDF text", "Watermark PDF files"],
+      "when_not_to_use": ["The source is plain text or DOCX", "No PDF files are involved"],
+      "example_tasks": ["Merge PDFs", "Extract tables", "Watermark 50 PDFs"],
+      "risk_of_overuse": "Do not use PDF tools for documents that can be edited directly."
+    },
+    {
+      "category_name": "Slides",
+      "plain_english_description": "Presentation and slide deck creation, editing, and export.",
+      "chinese_description": "用于创建、编辑和导出演示文稿。",
+      "when_to_use": ["Create a pitch deck", "Edit PPTX", "Turn notes into slides"],
+      "when_not_to_use": ["The deliverable is a document or web page", "Only an outline is needed"],
+      "example_tasks": ["Build a quarterly review deck", "Convert a report into slides"],
+      "risk_of_overuse": "Slides add design overhead when a simple document would work."
+    },
+    {
+      "category_name": "Spreadsheets",
+      "plain_english_description": "Spreadsheet analysis, formulas, charts, cleaning, and workbook creation.",
+      "chinese_description": "用于表格分析、公式、图表、数据清洗和工作簿创建。",
+      "when_to_use": ["Analyze CSV/XLSX", "Create formulas", "Generate charts"],
+      "when_not_to_use": ["No tabular data is involved", "Only prose output is needed"],
+      "example_tasks": ["Clean sales data", "Build a budget sheet", "Create a pivot-style summary"],
+      "risk_of_overuse": "Can be too heavy for small lists or simple arithmetic."
+    },
+    {
+      "category_name": "Images",
+      "plain_english_description": "Image generation, editing, background removal, and visual asset creation.",
+      "chinese_description": "用于图片生成、编辑、去背景和视觉素材制作。",
+      "when_to_use": ["Generate a hero image", "Edit an uploaded image", "Create visual assets"],
+      "when_not_to_use": ["The task is text-only", "Existing brand assets must not be altered"],
+      "example_tasks": ["Create a product mockup", "Remove an image background"],
+      "risk_of_overuse": "Generated images can distract from tasks that only need code or writing."
+    },
+    {
+      "category_name": "Video generation workflow",
+      "plain_english_description": "Video scripting, animation, captions, voiceover, rendering, and web-to-video workflows.",
+      "chinese_description": "用于视频脚本、动画、字幕、配音、渲染和网页转视频工作流。",
+      "when_to_use": ["Create a promo video", "Render an animation", "Add captions or voiceover"],
+      "when_not_to_use": ["The deliverable is only a static image, document, or website"],
+      "example_tasks": ["Create a product demo video", "Build an animated explainer", "Turn a website into a short promo"],
+      "risk_of_overuse": "Video workflows are heavy; avoid them when a still image, slide, or short text is enough."
+    },
+    {
+      "category_name": "Figma / Design",
+      "plain_english_description": "Figma design inspection, UI generation, design systems, and design-to-code workflows.",
+      "chinese_description": "用于 Figma 设计读取、UI 生成、设计系统和设计转代码流程。",
+      "when_to_use": ["Use an existing Figma design", "Build a design system", "Map design to code"],
+      "when_not_to_use": ["No design file exists", "A simple UI can be built directly"],
+      "example_tasks": ["Convert Figma to React", "Create Figma components"],
+      "risk_of_overuse": "Adds design tooling complexity when the project has no design source."
+    },
+    {
+      "category_name": "Email",
+      "plain_english_description": "Email search, drafting, sending, and inbox workflows.",
+      "chinese_description": "用于邮件搜索、起草、发送和收件箱工作流。",
+      "when_to_use": ["Draft replies", "Summarize email threads", "Send approved messages"],
+      "when_not_to_use": ["No email account action is needed", "The task is generic writing"],
+      "example_tasks": ["Draft client replies", "Summarize unread messages"],
+      "risk_of_overuse": "Creates privacy and permission concerns when a template is enough."
+    },
+    {
+      "category_name": "Calendar",
+      "plain_english_description": "Scheduling, event lookup, meeting planning, and calendar updates.",
+      "chinese_description": "用于日程安排、会议查询、会议计划和日历更新。",
+      "when_to_use": ["Schedule meetings", "Find availability", "Create calendar events"],
+      "when_not_to_use": ["Only a written plan is needed", "No calendar account is connected"],
+      "example_tasks": ["Book a review meeting", "Summarize today's agenda"],
+      "risk_of_overuse": "Unneeded for static plans or reminders handled elsewhere."
+    },
+    {
+      "category_name": "Contacts",
+      "plain_english_description": "Contact lookup, relationship context, and address book workflows.",
+      "chinese_description": "用于联系人查询、人际关系上下文和通讯录工作流。",
+      "when_to_use": ["Find contact details", "Prepare outreach lists"],
+      "when_not_to_use": ["The user provides all contact details", "No account access is needed"],
+      "example_tasks": ["Find a client email", "Group contacts for outreach"],
+      "risk_of_overuse": "May introduce privacy risk for simple manual contact lists."
+    },
+    {
+      "category_name": "Cloud Storage",
+      "plain_english_description": "Google Drive or other cloud file lookup, sharing, export, and organization.",
+      "chinese_description": "用于 Google Drive 等云端文件查找、共享、导出和整理。",
+      "when_to_use": ["Find cloud files", "Edit Google Docs", "Export cloud assets"],
+      "when_not_to_use": ["Files are local", "No connected cloud account is needed"],
+      "example_tasks": ["Find a Drive file", "Summarize a Google Doc"],
+      "risk_of_overuse": "Adds account dependency when local upload or text input is simpler."
+    },
+    {
+      "category_name": "Automation",
+      "plain_english_description": "Recurring tasks, scheduled checks, reminders, and monitors.",
+      "chinese_description": "用于定时任务、提醒、监控和自动化流程。",
+      "when_to_use": ["Create a reminder", "Monitor a site", "Run recurring checks"],
+      "when_not_to_use": ["The task is one-time", "The user only needs instructions"],
+      "example_tasks": ["Remind me weekly", "Check a price every day"],
+      "risk_of_overuse": "Recurring automation is unnecessary for one-off tasks."
+    },
+    {
+      "category_name": "MCP",
+      "plain_english_description": "External Model Context Protocol servers that expose tools, data, or systems to Codex.",
+      "chinese_description": "用于连接通过 MCP 暴露给 Codex 的外部工具、数据或系统。",
+      "when_to_use": ["Need a specific external system", "Use a company database", "Call custom tools"],
+      "when_not_to_use": ["Native tools are enough", "No external system is involved"],
+      "example_tasks": ["Query an internal system", "Use a custom deployment tool"],
+      "risk_of_overuse": "Can add setup and security overhead without a concrete integration need."
+    },
+    {
+      "category_name": "Security",
+      "plain_english_description": "Security review, dependency risk, secrets handling, and vulnerability checks.",
+      "chinese_description": "用于安全审查、依赖风险、密钥处理和漏洞检查。",
+      "when_to_use": ["Auth changes", "Dependency upgrades", "Secret scanning"],
+      "when_not_to_use": ["The task is purely cosmetic", "No security-sensitive area is touched"],
+      "example_tasks": ["Review auth flow", "Check dependency risk"],
+      "risk_of_overuse": "May slow minor low-risk edits if treated as mandatory every time."
+    },
+    {
+      "category_name": "Testing",
+      "plain_english_description": "Automated tests, UI checks, regression verification, and quality gates.",
+      "chinese_description": "用于自动化测试、UI 检查、回归验证和质量门禁。",
+      "when_to_use": ["Refactor code", "Change user-facing behavior", "Verify a bug fix"],
+      "when_not_to_use": ["Only documentation changes", "No runnable project exists"],
+      "example_tasks": ["Run unit tests", "Add Playwright tests", "Check a build"],
+      "risk_of_overuse": "Can be too heavy for tiny docs-only changes."
+    },
+    {
+      "category_name": "Deployment",
+      "plain_english_description": "Hosting, release, infrastructure, and production deployment workflows.",
+      "chinese_description": "用于托管、发布、基础设施和生产部署流程。",
+      "when_to_use": ["Publish an app", "Configure hosting", "Debug deployment logs"],
+      "when_not_to_use": ["The project is local only", "The user is not ready to publish"],
+      "example_tasks": ["Deploy to Render", "Set env vars", "Debug failed deployment"],
+      "risk_of_overuse": "Premature deployment can distract from building the first working version."
+    },
+    {
+      "category_name": "Translation",
+      "plain_english_description": "Translation, localization, rewriting across languages, and bilingual output.",
+      "chinese_description": "用于翻译、本地化、跨语言改写和双语输出。",
+      "when_to_use": ["Translate text", "Localize README", "Rewrite bilingual content"],
+      "when_not_to_use": ["The task requires external files or app actions more than language work"],
+      "example_tasks": ["Translate a README", "Rewrite Chinese copy in English"],
+      "risk_of_overuse": "Native Codex language ability is often enough for short text."
+    },
+    {
+      "category_name": "Writing",
+      "plain_english_description": "Drafting, editing, summarizing, README writing, and plain-language communication.",
+      "chinese_description": "用于写作、编辑、总结、README 和清晰表达。",
+      "when_to_use": ["Write documentation", "Summarize notes", "Edit website copy"],
+      "when_not_to_use": ["The task is mostly code, data, or external account operations"],
+      "example_tasks": ["Write a README", "Edit product copy", "Summarize meeting notes"],
+      "risk_of_overuse": "Usually does not need a plugin unless tied to document formats or cloud files."
+    },
+    {
+      "category_name": "Data Analytics",
+      "plain_english_description": "Evidence-backed analysis, KPI design, diagnostics, reports, dashboards, and charts.",
+      "chinese_description": "用于数据分析、指标设计、异常诊断、分析报告、仪表盘和图表。",
+      "when_to_use": ["Diagnose a metric change", "Build a KPI report", "Create a source-backed dashboard"],
+      "when_not_to_use": ["The task is simple arithmetic", "No data or business decision is involved"],
+      "example_tasks": ["Explain a conversion drop", "Design KPI definitions", "Create an executive report"],
+      "risk_of_overuse": "Do not introduce a full analytics workflow when a small spreadsheet check or a simple explanation is enough."
+    },
+    {
+      "category_name": "OpenAI Product Guidance",
+      "plain_english_description": "Official, current guidance for OpenAI products, APIs, models, Codex, and product-surface decisions.",
+      "chinese_description": "用于获取 OpenAI 产品、API、模型、Codex 和产品形态选择的官方最新指引。",
+      "when_to_use": ["Choose an OpenAI model", "Build with the OpenAI API", "Ask how to use Codex"],
+      "when_not_to_use": ["The task does not concern OpenAI products", "Generic programming advice is sufficient"],
+      "example_tasks": ["Compare current OpenAI models", "Implement the Responses API", "Choose a Codex surface"],
+      "risk_of_overuse": "Use official current guidance only when OpenAI-specific or version-sensitive information matters."
+    },
+    {
+      "category_name": "Work Management",
+      "plain_english_description": "Issue tracking, project planning, task workflows, and status updates in connected work-management systems.",
+      "chinese_description": "用于连接的项目管理系统中的议题跟踪、项目规划、任务流程和状态更新。",
+      "when_to_use": ["Create or update an issue", "Plan project work", "Review task status"],
+      "when_not_to_use": ["A local checklist is enough", "No connected project system is involved"],
+      "example_tasks": ["Create a Linear issue", "Triage a sprint", "Update an Asana task"],
+      "risk_of_overuse": "Avoid connected writes when the user only wants planning advice or has not approved a specific update."
+    },
+    {
+      "category_name": "Skill & Plugin Authoring",
+      "plain_english_description": "Creating, updating, validating, packaging, and distributing Codex skills and plugins.",
+      "chinese_description": "用于创建、更新、验证、打包和分发 Codex Skill 与插件。",
+      "when_to_use": ["Create a Codex skill", "Update SKILL.md", "Scaffold a Codex plugin"],
+      "when_not_to_use": ["The user only wants to choose a tool", "No reusable Codex artifact is being created"],
+      "example_tasks": ["Build a reusable skill", "Validate skill metadata", "Create a plugin manifest"],
+      "risk_of_overuse": "Do not turn a one-off prompt into a skill or plugin unless it will be reused."
+    },
+    {
+      "category_name": "Connected Workspace",
+      "plain_english_description": "Connected Google Drive, Docs, Sheets, Slides, and similar cloud-workspace content.",
+      "chinese_description": "用于连接的 Google Drive、Docs、Sheets、Slides 及类似云工作区内容。",
+      "when_to_use": ["Find or edit a Google file", "Update a shared spreadsheet", "Create a Google Slides deck"],
+      "when_not_to_use": ["Files are local", "The user only needs a standalone export"],
+      "example_tasks": ["Edit a Google Doc", "Analyze a shared Sheet", "Organize Drive files"],
+      "risk_of_overuse": "Connected access is unnecessary when a local file or pasted content is sufficient."
+    },
+    {
+      "category_name": "Desktop App Control",
+      "plain_english_description": "Direct interaction with a running desktop application when a file-based workflow is not enough.",
+      "chinese_description": "用于在仅靠文件操作无法完成时，直接控制正在运行的桌面应用。",
+      "when_to_use": ["Operate an open desktop app", "Use a live Excel session", "Interact with a Windows-only workflow"],
+      "when_not_to_use": ["A standalone file can be edited directly", "The application is not open or connected"],
+      "example_tasks": ["Update an open Excel workbook", "Control a Windows application"],
+      "risk_of_overuse": "Prefer reproducible file edits when they meet the need; GUI control is slower and more fragile."
+    }
+  ]
+}

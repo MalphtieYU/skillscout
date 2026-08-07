@@ -70,6 +70,17 @@ Copy or clone this folder as `skillscout` into your Codex skills directory (comm
 Use $skillscout to choose the best starting path for my project and continue the work.
 ```
 
+### Install as a Codex plugin from GitHub
+
+This repository also publishes a public Codex marketplace source. With a current Codex CLI, add the marketplace and install the plugin:
+
+```text
+codex plugin marketplace add MalphtieYU/skillscout
+codex plugin add skillscout@skillscout-marketplace
+```
+
+Restart Codex or start a new thread after installation. This GitHub marketplace is available now; public listing in the universal ChatGPT/Codex Plugins Directory requires a separate OpenAI review.
+
 ## Project layout
 
 | Path | Purpose |
@@ -87,6 +98,7 @@ Run from the repository root:
 
 ```text
 node scripts/validate-data.mjs
+node scripts/validate-plugin-package.mjs
 ```
 
 The script checks JSON structure, rule coverage, example inventory, and the startup templates. Review [test cases](docs/test-cases.md) for behavior-level scenarios.
@@ -94,6 +106,10 @@ The script checks JSON structure, rule coverage, example inventory, and the star
 ## Future installation support
 
 `data/plugin-install-registry.schema.json` defines a future-compatible installation registry. It can represent verified marketplace URLs, app permissions, supported Codex surfaces, and admin requirements. It deliberately does **not** imply that one-click installation or `codex://` deep links exist today.
+
+## Public-plugin status
+
+SkillScout is packaged as a skills-only plugin and exposed through this public GitHub marketplace. A universal Plugins Directory submission is not yet complete: OpenAI requires a verified publisher identity, Apps Management write access, public support/privacy/terms pages, review-ready starter prompts, and at least five positive plus three negative test cases before review and publication.
 
 ## Roadmap
 

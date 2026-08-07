@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "Prevent tools from being recommended when native Codex is clearer, safer, and sufficient.",
+  "rules": [
+    {
+      "id": "prompt-writing",
+      "signals": ["write a prompt", "Midjourney prompt", "video prompt", "prompt idea"],
+      "default_decision": "Avoid Plugin",
+      "native_first_reason": "Writing a prompt is text generation; a tool does not improve the requested result.",
+      "escalate_when": "The user asks to directly generate, edit, or batch-process media."
+    },
+    {
+      "id": "small-code-edit",
+      "signals": ["small code fix", "short JS snippet", "explain this bug", "one function"],
+      "default_decision": "Native Only",
+      "native_first_reason": "A pasted or local code snippet can be fixed with native coding ability.",
+      "escalate_when": "The user needs Codex to read or modify a real repository, commit, open a PR, review CI, or manage an issue."
+    },
+    {
+      "id": "simple-static-page",
+      "signals": ["simple static website", "landing page", "single page website", "HTML page"],
+      "default_decision": "Native Only",
+      "native_first_reason": "Codex can build a small static page without Figma, deployment, or a complex framework.",
+      "escalate_when": "A real Figma source, hosting action, existing repository, or visual-browser QA is required."
+    },
+    {
+      "id": "writing-translation",
+      "signals": ["translate", "polish", "rewrite", "copywriting", "edit this email"],
+      "default_decision": "Native Only",
+      "native_first_reason": "Language work on provided text does not need connected account access.",
+      "escalate_when": "The user needs to read, reply to, or send a real email or edit a real document."
+    },
+    {
+      "id": "pasted-table-analysis",
+      "signals": ["pasted table", "analyze this table", "CSV pasted", "table data below"],
+      "default_decision": "Native Only",
+      "native_first_reason": "Codex can inspect small pasted data directly.",
+      "escalate_when": "The task requires a real Excel file, complex charts, saved workbooks, formatting preservation, or recurring analysis."
+    },
+    {
+      "id": "image-prompt-only",
+      "signals": ["image prompt", "describe an image", "prompt for an image"],
+      "default_decision": "Avoid Plugin",
+      "native_first_reason": "A prompt is text; image generation is not needed until the user wants an actual image result.",
+      "escalate_when": "The user asks to generate, edit, or batch-process images."
+    },
+    {
+      "id": "advice-or-ideas",
+      "signals": ["project advice", "learning roadmap", "business idea", "how should I start"],
+      "default_decision": "Native Only",
+      "native_first_reason": "Planning and idea analysis can start with the information already in the conversation.",
+      "escalate_when": "The answer needs current market research, competitor evidence, or the user's private sources."
+    },
+    {
+      "id": "how-to-question",
+      "signals": ["how do I", "how to", "what is the best way"],
+      "default_decision": "Native Only",
+      "native_first_reason": "Give a method first; recommending tools before understanding the action is premature.",
+      "escalate_when": "The user asks Codex to carry out an action in a real external system."
+    }
+  ]
+}

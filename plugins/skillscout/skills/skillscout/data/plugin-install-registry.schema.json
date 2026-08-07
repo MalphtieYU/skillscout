@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MalphtieYU/skillscout/blob/main/data/plugin-install-registry.schema.json",
+  "title": "SkillScout Plugin Install Registry Entry",
+  "description": "Future-compatible verified installation metadata. Empty or unknown fields must not be presented as working installation routes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["plugin_id", "display_name", "type", "short_description", "required_plan", "required_workspace_permission", "required_apps", "required_app_permissions", "supported_surfaces", "install_status", "install_button_label", "fallback_instruction", "last_verified_at"],
+  "properties": {
+    "plugin_id": {"type":"string","minLength":1},
+    "display_name": {"type":"string","minLength":1},
+    "type": {"type":"string","enum":["plugin","skill","app","mcp","template"]},
+    "short_description": {"type":"string","minLength":1},
+    "install_url": {"type":["string","null"],"format":"uri"},
+    "marketplace_url": {"type":["string","null"],"format":"uri"},
+    "codex_deeplink": {"type":["string","null"]},
+    "docs_url": {"type":["string","null"],"format":"uri"},
+    "required_plan": {"type":["string","null"]},
+    "required_workspace_permission": {"type":"boolean"},
+    "required_apps": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "required_app_permissions": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "supported_surfaces": {"type":"array","items":{"type":"string","enum":["ChatGPT","Codex Web","Codex CLI","Codex Desktop"]},"uniqueItems":true},
+    "install_status": {"type":"string","enum":["available","unavailable","unknown","admin_required","already_installed"]},
+    "install_button_label": {"type":"string","minLength":1},
+    "fallback_instruction": {"type":"string","minLength":1},
+    "last_verified_at": {"type":"string","format":"date"}
+  },
+  "allOf": [
+    {"if":{"properties":{"install_status":{"const":"available"}},"required":["install_status"]},"then":{"anyOf":[{"properties":{"install_url":{"type":"string"}},"required":["install_url"]},{"properties":{"marketplace_url":{"type":"string"}},"required":["marketplace_url"]}]}}
+  ]
+}
