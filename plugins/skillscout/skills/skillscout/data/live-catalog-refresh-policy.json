@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "Keep SkillScout recommendations current without treating static project data as a live Codex directory.",
+  "runtime_order": [
+    "current_session_capability_catalog",
+    "official_codex_documentation_or_plugins_directory",
+    "verified_public_plugin_source",
+    "category_level_recommendation_with_uncertainty"
+  ],
+  "refresh_triggers": [
+    "A user asks for currently available, newly released, installed, or recommended plugins.",
+    "A recommendation depends on whether a named skill, app, MCP server, or plugin exists now.",
+    "Codex publishes a plugin, app, skill, or marketplace update.",
+    "A maintained rule names a capability whose availability may have changed."
+  ],
+  "required_behavior": [
+    "Inspect current-session metadata before naming a current capability.",
+    "Use official OpenAI/Codex sources for product-wide claims when available.",
+    "Do not invent install links, deep links, permission requirements, plan requirements, country availability, or marketplace status.",
+    "Fall back to a category-level recommendation when freshness cannot be verified.",
+    "Record verified changes in the appropriate rule, example, and documentation files before releasing a new plugin version."
+  ],
+  "non_goals": [
+    "This policy does not promise background polling or autonomous marketplace synchronization.",
+    "This policy does not treat third-party listings as official Codex availability evidence.",
+    "This policy does not grant access to private app, workspace, or admin metadata."
+  ]
+}

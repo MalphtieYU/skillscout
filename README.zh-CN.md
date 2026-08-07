@@ -57,10 +57,15 @@ SkillScout 会：
 - 插件没装时，继续完成不依赖插件的部分。
 - 不编造安装链接、深链接、权限或安装状态。
 - 涉及私有数据和写操作时，给出简短安全提示。
+- 对依赖时效性的工具推荐，先检查当前 Codex 能力信息。
 
 ## 国际化使用
 
 本仓库提供英文主 README 与本中文完整说明。SkillScout 会尽量按用户的语言，用通俗说法解释工具，而不是照抄英文插件简介。其他语言的维护方式见 [本地化指南](docs/localization-guide.md)。
+
+## 当前能力信息
+
+SkillScout 把仓库中的数据视为决策模型，而不是永远不变的插件目录。当推荐取决于当前已安装、刚发布或当前支持的能力时，它会先检查当前会话的能力目录，再在可用时查询官方 Codex 信息。无法验证时效性时，只会推荐能力类别，不会编造具体插件可用性。详见[实时能力策略](docs/live-catalog-policy.md)。
 
 ## 安装
 
@@ -98,7 +103,7 @@ node scripts/validate-plugin-package.mjs
 
 ## 公开插件状态
 
-SkillScout 现已打包为仅含 Skill 的插件，并通过这个公开 GitHub marketplace 分发。通用 Plugins Directory 的上架尚未完成：OpenAI 还要求已验证的发布者身份、Apps Management 写权限、公开的支持/隐私/条款页面、可供审核的启动提示词，以及至少 5 条正向和 3 条负向测试用例。
+SkillScout 现已打包为仅含 Skill 的插件，并通过这个公开 GitHub marketplace 分发。通用 Plugins Directory 的上架尚未完成：OpenAI 还要求已验证的发布者身份、Apps Management 写权限、公开的支持/隐私/条款页面、可供审核的启动提示词、至少 5 条正向和 3 条负向测试用例，以及发布者确认的可用国家或地区。详见[提交清单](docs/universal-directory-submission.md)。
 
 ## 贡献
 

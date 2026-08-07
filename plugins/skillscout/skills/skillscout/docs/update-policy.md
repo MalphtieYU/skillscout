@@ -11,6 +11,7 @@ Review this project when:
 - A plugin gains or loses major capabilities.
 - A better default workflow becomes available for a common task.
 - Example recommendations start mentioning outdated tool names.
+- Official Codex documentation or the Plugins Directory changes a capability, surface, or installation path.
 
 ## What To Update
 
@@ -20,6 +21,7 @@ Review this project when:
 - `data/anti-recommendation-rules.json`: native-first boundaries and escalation conditions.
 - `data/minimal-tool-stack-rules.json`: smallest viable stacks for common outcomes.
 - `data/permission-risk-rules.json`: safety guidance for connected data and write actions.
+- `data/live-catalog-refresh-policy.json`: runtime freshness boundaries and verified-source order.
 - `examples/`: example recommendations that mention changed tools.
 - `README.md`: public-facing usage and roadmap notes.
 - `SKILL.md`: core workflow only when the recommendation process itself changes.
@@ -31,6 +33,7 @@ Review this project when:
 3. Keep "no plugin needed" guidance intact where native Codex is enough.
 4. Run `node scripts/validate-data.mjs`.
 5. Update bilingual explanations when terminology changes.
+6. Confirm current availability against the session catalog and official Codex sources before naming a specific integration.
 
 ## Release Guidance
 

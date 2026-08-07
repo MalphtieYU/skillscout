@@ -36,11 +36,14 @@ const registrySchema = readJson("data/plugin-registry.schema.json");
 const singleBestData = readJson("data/single-best-plugin-rules.json");
 const primarySecondaryData = readJson("data/primary-secondary-tool-rules.json");
 const installRegistrySchema = readJson("data/plugin-install-registry.schema.json");
+const liveCatalogPolicy = readJson("data/live-catalog-refresh-policy.json");
 
 const versionedData = [categoriesData, rulesData, frameworkData, antiRulesData, complexityData, minimalStackData, permissionData, singleBestData, primarySecondaryData];
 for (const data of versionedData) {
   assert(/^\d+\.\d+\.\d+$/.test(data.schema_version), "all rule data needs a semantic schema_version");
 }
+assert(/^\d+\.\d+\.\d+$/.test(liveCatalogPolicy.schema_version), "live catalog policy needs a semantic schema_version");
+for (const field of ["runtime_order", "refresh_triggers", "required_behavior", "non_goals"]) nonEmptyArray(liveCatalogPolicy[field], `live catalog policy.${field}`);
 
 nonEmptyArray(categoriesData.categories, "categories");
 nonEmptyArray(rulesData.rules, "recommendation rules");
@@ -127,7 +130,7 @@ for (const example of expectedExamples) assert(existsSync(resolve(root, "example
 
 const inlineExamples = ["native-video-prompt.md", "figma-react.md", "github-pr.md", "email-polish.md", "gmail-summary.md", "drive-docs-organize.md", "vague-project.md"];
 for (const example of inlineExamples) assert(existsSync(resolve(root, "examples", "inline-startup-decisions", example)), `missing inline startup example: ${example}`);
-for (const relativePath of ["README.md", "README.zh-CN.md", "docs/continue-after-recommendation.md", "docs/test-cases.md", "docs/localization-guide.md", "prompts/startup-response-template.md", "prompts/install-card-template.md"]) {
+for (const relativePath of ["README.md", "README.zh-CN.md", "docs/continue-after-recommendation.md", "docs/test-cases.md", "docs/localization-guide.md", "docs/live-catalog-policy.md", "prompts/startup-response-template.md", "prompts/install-card-template.md"]) {
   assert(existsSync(resolve(root, relativePath)), `missing required project file: ${relativePath}`);
 }
 

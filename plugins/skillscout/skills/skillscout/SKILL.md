@@ -39,6 +39,16 @@ When invoked with a project request, start with a short tool decision of three t
 6. Read `data/permission-risk-rules.json` whenever the selected tool reads private data or performs writes.
 7. Follow `docs/continue-after-recommendation.md` to continue execution whether the tool is installed, unavailable, or permission-gated.
 
+## Fresh Availability Rules
+
+Treat bundled category data as decision guidance, not a live plugin directory. When the recommendation depends on current plugin availability, installation status, capabilities, or current Codex behavior:
+
+1. Inspect the current session's available skills, apps, plugins, and tool metadata first.
+2. Verify product-wide facts with the current official Codex documentation or official Plugins Directory information when network access is available.
+3. Name a specific plugin only when it is visible in the current environment or verified by an official current source; otherwise recommend the capability category and state that availability must be checked.
+4. Never claim that a plugin is installed, publicly listed, available in a country, or one-click installable from static project data alone.
+5. Refresh the project rules after verified platform changes using `docs/live-catalog-policy.md`.
+
 ## Output Constraints
 
 - Name no more than one primary tool and one necessary secondary tool at startup.

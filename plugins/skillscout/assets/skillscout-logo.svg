@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">SkillScout</title>
+  <desc id="desc">A compass that represents choosing the right tool.</desc>
+  <rect width="256" height="256" rx="56" fill="#2563EB"/>
+  <circle cx="128" cy="128" r="74" fill="#EFF6FF" opacity="0.98"/>
+  <path d="M168 88 148 148 88 168l20-60 60-20Z" fill="#2563EB"/>
+  <path d="m128 108 20 40-40 20 20-60Z" fill="#0F172A"/>
+  <circle cx="128" cy="128" r="10" fill="#F59E0B"/>
+</svg>

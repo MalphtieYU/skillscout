@@ -57,10 +57,15 @@ Plugins can unlock real capabilities, but they can also add setup time, permissi
 - Continues with native work if an integration is unavailable.
 - Never invents installation links, deep links, permissions, or installation status.
 - Adds concise safety guidance for private data and write actions.
+- Checks current Codex capability information before making time-sensitive tool claims.
 
 ## International use
 
 The primary README is English for broad accessibility and [the Chinese README](README.zh-CN.md) provides a full Simplified Chinese guide. SkillScout can explain tool choices in the user's language and uses plain-language terminology instead of copying marketplace descriptions. See the [localization guide](docs/localization-guide.md) to add another language.
+
+## Current capability information
+
+SkillScout treats its bundled data as a decision model, not a frozen plugin catalog. When a choice depends on what is installed, newly available, or currently supported, it checks the current session's capabilities first and then official Codex sources when available. If freshness cannot be verified, it recommends a category rather than making a false claim. See the [live capability policy](docs/live-catalog-policy.md).
 
 ## Install
 
@@ -109,7 +114,7 @@ The script checks JSON structure, rule coverage, example inventory, and the star
 
 ## Public-plugin status
 
-SkillScout is packaged as a skills-only plugin and exposed through this public GitHub marketplace. A universal Plugins Directory submission is not yet complete: OpenAI requires a verified publisher identity, Apps Management write access, public support/privacy/terms pages, review-ready starter prompts, and at least five positive plus three negative test cases before review and publication.
+SkillScout is packaged as a skills-only plugin and exposed through this public GitHub marketplace. A universal Plugins Directory submission is not yet complete: OpenAI requires a verified publisher identity, Apps Management write access, public support/privacy/terms pages, review-ready starter prompts, at least five positive plus three negative test cases, and publisher-selected country availability. See the [submission checklist](docs/universal-directory-submission.md).
 
 ## Roadmap
 

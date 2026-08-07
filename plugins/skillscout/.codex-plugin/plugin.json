@@ -1,6 +1,6 @@
 {
   "name": "skillscout",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Choose one best Codex project-start path and continue the work.",
   "author": {
     "name": "MalphtieYU",
@@ -26,6 +26,9 @@
       "Use SkillScout to decide whether this task needs a plugin or native Codex.",
       "Use SkillScout to start a Figma-to-React project with the right tools."
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#2563EB",
+    "composerIcon": "./assets/skillscout-logo.png",
+    "logo": "./assets/skillscout-logo.png",
+    "logoDark": "./assets/skillscout-logo.png"
   }
 }
