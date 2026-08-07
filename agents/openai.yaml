@@ -1,0 +1,4 @@
+interface:
+  display_name: "SkillScout"
+  short_description: "Choose the smallest useful Codex tool stack."
+  default_prompt: "Use $skillscout to recommend the smallest useful tool stack for my Codex task."

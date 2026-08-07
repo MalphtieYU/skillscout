@@ -1,0 +1,215 @@
+{
+  "schema_version": "0.2.0",
+  "last_reviewed": "2026-08-07",
+  "versioning": {
+    "tracks_codex_plugin_updates": true,
+    "review_after_codex_plugin_updates": true,
+    "notes": "Rules should be reviewed whenever Codex adds, removes, renames, or materially changes plugins, skills, apps, or MCP integrations."
+  },
+  "recommendation_levels": [
+    "must_use",
+    "strongly_recommended",
+    "optional_enhancement",
+    "usually_not_needed"
+  ],
+  "rules": [
+    {
+      "project_type": "Pure coding task",
+      "detection_keywords": ["code", "bug", "refactor", "function", "script", "test", "library", "API"],
+      "likely_needed_tools": ["Code & Repo"],
+      "optional_tools": ["Testing", "GitHub", "Security"],
+      "usually_not_needed_tools": ["Figma / Design", "Slides", "PDF", "Calendar", "Email"],
+      "no_plugin_possible": true,
+      "decision_notes": "Native Codex plus local file access is often enough. Add GitHub only for remote PRs or issue workflows."
+    },
+    {
+      "project_type": "Frontend UI project",
+      "detection_keywords": ["frontend", "website", "responsive", "React", "Vue", "layout", "UI", "CSS"],
+      "likely_needed_tools": ["Code & Repo", "Browser / Web"],
+      "optional_tools": ["Figma / Design", "Images", "Deployment", "GitHub"],
+      "usually_not_needed_tools": ["PDF", "Slides", "Email", "Calendar"],
+      "no_plugin_possible": true,
+      "decision_notes": "Simple UI can be built natively. Browser testing becomes more important for responsive or visual QA."
+    },
+    {
+      "project_type": "Full-stack app",
+      "detection_keywords": ["full-stack", "database", "backend", "auth", "API", "server", "dashboard", "SaaS"],
+      "likely_needed_tools": ["Code & Repo", "Testing"],
+      "optional_tools": ["Deployment", "GitHub", "Security", "Browser / Web", "MCP"],
+      "usually_not_needed_tools": ["Slides", "PDF", "Calendar"],
+      "no_plugin_possible": true,
+      "decision_notes": "Start with native coding. Add deployment, database, or MCP tools only when the app requires external systems."
+    },
+    {
+      "project_type": "GitHub repository maintenance",
+      "detection_keywords": ["GitHub", "pull request", "PR", "issue", "branch", "repo", "commit", "review"],
+      "likely_needed_tools": ["GitHub", "Code & Repo"],
+      "optional_tools": ["Testing", "Security"],
+      "usually_not_needed_tools": ["Figma / Design", "Slides", "PDF", "Images"],
+      "no_plugin_possible": false,
+      "decision_notes": "GitHub is required or strongly recommended when Codex must act on remote issues, branches, or PRs."
+    },
+    {
+      "project_type": "PDF processing",
+      "detection_keywords": ["PDF", "watermark", "merge", "split", "extract", "OCR", "form"],
+      "likely_needed_tools": ["PDF", "Files & Documents"],
+      "optional_tools": ["Code & Repo", "Cloud Storage"],
+      "usually_not_needed_tools": ["Figma / Design", "Slides", "GitHub", "Calendar"],
+      "no_plugin_possible": false,
+      "decision_notes": "PDF tools or deterministic scripts are strongly recommended for batch or format-preserving work."
+    },
+    {
+      "project_type": "PPT / slide generation",
+      "detection_keywords": ["PPT", "PowerPoint", "slides", "deck", "presentation", "pitch"],
+      "likely_needed_tools": ["Slides"],
+      "optional_tools": ["Spreadsheets", "Images", "Cloud Storage", "Figma / Design"],
+      "usually_not_needed_tools": ["GitHub", "PDF", "Calendar"],
+      "no_plugin_possible": false,
+      "decision_notes": "Use slide tooling for editable decks. Native text is enough only for outlines."
+    },
+    {
+      "project_type": "Spreadsheet / data analysis",
+      "detection_keywords": ["spreadsheet", "Excel", "CSV", "XLSX", "formula", "chart", "data analysis"],
+      "likely_needed_tools": ["Spreadsheets"],
+      "optional_tools": ["Slides", "Cloud Storage", "Code & Repo"],
+      "usually_not_needed_tools": ["Figma / Design", "Images", "Calendar"],
+      "no_plugin_possible": true,
+      "decision_notes": "Small analysis can be done natively. Use spreadsheet tools for workbook creation, formulas, charts, or formatting."
+    },
+    {
+      "project_type": "Image generation or editing",
+      "detection_keywords": ["image", "generate image", "edit photo", "background", "logo", "mockup", "visual"],
+      "likely_needed_tools": ["Images"],
+      "optional_tools": ["Figma / Design", "Files & Documents"],
+      "usually_not_needed_tools": ["GitHub", "Slides", "Spreadsheets", "Calendar"],
+      "no_plugin_possible": false,
+      "decision_notes": "Use image tools for bitmap generation or editing. Use code-native assets for SVG or UI icons when appropriate."
+    },
+    {
+      "project_type": "Video generation workflow",
+      "detection_keywords": ["video", "animation", "voiceover", "caption", "render", "promo", "short"],
+      "likely_needed_tools": ["Video generation workflow", "Files & Documents"],
+      "optional_tools": ["Images", "Writing", "Browser / Web"],
+      "usually_not_needed_tools": ["Spreadsheets", "Calendar", "PDF"],
+      "no_plugin_possible": false,
+      "decision_notes": "Video tasks usually need a dedicated video or animation workflow, especially for renderable output."
+    },
+    {
+      "project_type": "Web research / latest information",
+      "detection_keywords": ["latest", "current", "news", "research", "today", "price", "recent", "compare"],
+      "likely_needed_tools": ["Browser / Web"],
+      "optional_tools": ["Writing", "Spreadsheets"],
+      "usually_not_needed_tools": ["Figma / Design", "Slides", "PDF"],
+      "no_plugin_possible": false,
+      "decision_notes": "Current or unstable information should be verified with web access or primary sources."
+    },
+    {
+      "project_type": "Email / calendar / personal assistant workflow",
+      "detection_keywords": ["email", "calendar", "schedule", "meeting", "inbox", "assistant", "contacts"],
+      "likely_needed_tools": ["Email", "Calendar"],
+      "optional_tools": ["Contacts", "Cloud Storage", "Automation"],
+      "usually_not_needed_tools": ["Figma / Design", "PDF", "Deployment"],
+      "no_plugin_possible": true,
+      "decision_notes": "Native Codex can draft messages, but connected tools are needed to read, send, or schedule in real accounts."
+    },
+    {
+      "project_type": "Automation / recurring task",
+      "detection_keywords": ["remind", "recurring", "daily", "weekly", "monitor", "automation", "scheduled"],
+      "likely_needed_tools": ["Automation"],
+      "optional_tools": ["Browser / Web", "Email", "Calendar", "MCP"],
+      "usually_not_needed_tools": ["Figma / Design", "Slides", "Images"],
+      "no_plugin_possible": false,
+      "decision_notes": "Use automation only for repeated future work. One-time tasks do not need it."
+    },
+    {
+      "project_type": "Design system / Figma workflow",
+      "detection_keywords": ["Figma", "design system", "component library", "tokens", "variants", "mockup"],
+      "likely_needed_tools": ["Figma / Design"],
+      "optional_tools": ["Code & Repo", "Images", "GitHub"],
+      "usually_not_needed_tools": ["PDF", "Calendar", "Email"],
+      "no_plugin_possible": false,
+      "decision_notes": "Figma tooling is strongly recommended when the actual deliverable is inside Figma or depends on Figma context."
+    },
+    {
+      "project_type": "Local file organization",
+      "detection_keywords": ["organize files", "rename", "folders", "local files", "batch", "cleanup"],
+      "likely_needed_tools": ["Files & Documents"],
+      "optional_tools": ["Code & Repo", "Automation"],
+      "usually_not_needed_tools": ["GitHub", "Figma / Design", "Slides"],
+      "no_plugin_possible": true,
+      "decision_notes": "Native Codex with filesystem access may be enough. Use scripts for repeatable batch operations."
+    },
+    {
+      "project_type": "Documentation / README writing",
+      "detection_keywords": ["README", "documentation", "docs", "guide", "manual", "explain"],
+      "likely_needed_tools": ["Writing"],
+      "optional_tools": ["Code & Repo", "GitHub", "Translation"],
+      "usually_not_needed_tools": ["Figma / Design", "Slides", "PDF", "Calendar"],
+      "no_plugin_possible": true,
+      "decision_notes": "Usually no plugin is needed unless the docs must be committed to a repo or exported to a specific format."
+    },
+    {
+      "project_type": "Translation / rewriting task",
+      "detection_keywords": ["translate", "rewrite", "polish", "localize", "Chinese", "English", "bilingual"],
+      "likely_needed_tools": ["Translation", "Writing"],
+      "optional_tools": ["Files & Documents", "Cloud Storage"],
+      "usually_not_needed_tools": ["GitHub", "Figma / Design", "Deployment", "Calendar"],
+      "no_plugin_possible": true,
+      "decision_notes": "Native Codex language ability is often enough. Use file or cloud tools only when source documents must be read or updated."
+    },
+    {
+      "project_type": "OpenAI product or API guidance",
+      "detection_keywords": ["OpenAI", "ChatGPT", "Codex", "Responses API", "model", "prompting"],
+      "likely_needed_tools": ["OpenAI Product Guidance"],
+      "optional_tools": ["Code & Repo", "Browser / Web"],
+      "usually_not_needed_tools": ["Figma / Design", "Slides", "Calendar"],
+      "no_plugin_possible": false,
+      "decision_notes": "Use official current product guidance when model, API, or Codex behavior may have changed."
+    },
+    {
+      "project_type": "Codex skill or plugin authoring",
+      "detection_keywords": ["create a skill", "update a skill", "SKILL.md", "Codex plugin", "plugin manifest", "marketplace"],
+      "likely_needed_tools": ["Skill & Plugin Authoring"],
+      "optional_tools": ["Code & Repo", "GitHub", "Testing"],
+      "usually_not_needed_tools": ["Slides", "Calendar", "Email"],
+      "no_plugin_possible": false,
+      "decision_notes": "Use skill or plugin authoring guidance for reusable Codex artifacts; add GitHub only when publishing or collaborating."
+    },
+    {
+      "project_type": "Data analytics and reporting",
+      "detection_keywords": ["KPI", "metric", "dashboard", "funnel", "cohort", "analysis", "reporting", "anomaly"],
+      "likely_needed_tools": ["Data Analytics"],
+      "optional_tools": ["Spreadsheets", "Slides", "Connected Workspace", "Writing"],
+      "usually_not_needed_tools": ["Figma / Design", "Calendar"],
+      "no_plugin_possible": true,
+      "decision_notes": "Start with the smallest evidence-backed analysis workflow; use specialized analytics support for diagnostics, reports, or dashboards."
+    },
+    {
+      "project_type": "Connected workspace files",
+      "detection_keywords": ["Google Drive", "Google Docs", "Google Sheets", "Google Slides", "shared document", "shared spreadsheet"],
+      "likely_needed_tools": ["Connected Workspace"],
+      "optional_tools": ["Writing", "Spreadsheets", "Slides", "Cloud Storage"],
+      "usually_not_needed_tools": ["Figma / Design", "Deployment"],
+      "no_plugin_possible": false,
+      "decision_notes": "Connected workspace access is needed to find or change content in the user's cloud files; pasted content can be handled natively."
+    },
+    {
+      "project_type": "Work management workflow",
+      "detection_keywords": ["Linear", "Asana", "Jira", "ticket", "sprint", "backlog", "project status"],
+      "likely_needed_tools": ["Work Management"],
+      "optional_tools": ["GitHub", "Writing", "Automation"],
+      "usually_not_needed_tools": ["PDF", "Figma / Design", "Images"],
+      "no_plugin_possible": true,
+      "decision_notes": "Use a connected work-management tool only when the user needs to inspect or update its live records; use native planning for a local plan."
+    },
+    {
+      "project_type": "Live desktop application workflow",
+      "detection_keywords": ["open Excel", "active workbook", "desktop app", "Windows application", "live session"],
+      "likely_needed_tools": ["Desktop App Control"],
+      "optional_tools": ["Spreadsheets", "Files & Documents"],
+      "usually_not_needed_tools": ["GitHub", "Figma / Design", "Deployment"],
+      "no_plugin_possible": false,
+      "decision_notes": "Use desktop control only for an open, connected application; otherwise prefer standalone file editing for reproducibility."
+    }
+  ]
+}
