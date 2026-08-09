@@ -23,7 +23,8 @@ Update the repository after a verified platform change:
 4. Update the GitHub marketplace package.
 5. For universal-directory publication, submit the changed version for OpenAI review before claiming the directory is current.
 
+Maintainers may run a recurring official-source review to identify material platform changes. It must preserve the runtime rules above: updates may improve repository data and documentation, but they cannot turn a static skill into a live directory or bypass a user's account, workspace, or marketplace policy.
+
 ## Boundaries
 
-SkillScout does not run a background internet monitor, scrape private marketplaces, bypass workspace policy, or assume a user's installation state. It performs freshness checks at the time a recommendation needs them. That is safer than promising a live catalog when the environment cannot verify one.
-
+SkillScout does not scrape private marketplaces, bypass workspace policy, or assume a user's installation state. A maintainer monitor is only a repository-maintenance aid; a recommendation still performs freshness checks at the time it needs a current fact. That is safer than promising a live catalog when the environment cannot verify one.

@@ -1,114 +1,91 @@
 # SkillScout
 
-> **工具更少，结果更好。**
+> 用最少、最合适的能力，直接开始完成 Codex 项目。
 
-[English](README.md) · 简体中文
+SkillScout 是 Codex 的**项目启动与能力边界层**。你只需要描述一个真实任务；它会在 Codex 原生能力、已安装 Skill、插件、App、MCP 和“不需要额外工具”之间，选出最小可行路径，然后直接开始工作。
 
-SkillScout 是 Codex 项目启动时的工具决策层。你只需 @ 一次 SkillScout，然后正常描述需求；它会选择一个最佳启动方案——直接使用 Codex 原生能力、一个主插件，或确有必要时的最小双工具组合——然后直接继续做项目。
+它不是插件目录，也不会让你在一长串工具中做选择。
 
-SkillScout **不是插件目录**。它的目标是减少选择，不是增加选择。
+## 它真正解决什么问题
 
-## 如何使用
+第一次回复会给出四件事：
 
-在 Codex 项目开始时输入：
+1. **最小可行路径**：Codex 原生、一个主能力，或确有必要的一对能力。
+2. **选择原因**：依据真实输入、交付目标和权限风险，而不是关键词堆砌。
+3. **立即执行的第一步**：推荐后继续做项目，不停在“建议使用某某插件”。
+4. **必要的访问边界**：只说明真正需要的仓库权限、文件或账号访问。
 
-```text
-@SkillScout 我想重构 GitHub 仓库并开一个 Pull Request。
-```
+当任务涉及仓库、设计稿、云文件、MCP、当前网络信息，且你不确定该用什么时使用它。小型写作、翻译、粘贴代码解释等任务不需要 SkillScout，直接让 Codex 做即可。
 
-SkillScout 会：
+## 快速安装
 
-1. 判断任务是否真的需要插件。
-2. 选出一个默认最佳插件，或明确选择 Codex 原生能力。
-3. 用很短的文字解释原因。
-4. 仅在有已验证入口时提供安装方式。
-5. 不让你比较一堆插件，直接继续项目。
+在新版 Codex CLI 中添加公开 GitHub 市场源：
 
-示例：
-
-```text
-推荐使用：GitHub
-原因：任务需要读取真实仓库、提交修改并创建 PR。
-执行方式：我会按 GitHub + Codex 原生能力继续完成项目。
-```
-
-随后它会直接开始仓库工作，而不是停下来让你从插件列表中做选择。
-
-## 为什么不是所有任务都要插件？
-
-插件可以解锁真实能力，但也会增加安装时间、权限、延迟、上下文噪声和失败点。要修改真实 GitHub 仓库时 GitHub 很有价值；只修一小段代码时则没有必要。SkillScout 会明确说明这条边界。
-
-## 它会如何选择
-
-| 场景 | 默认方案 |
-| --- | --- |
-| 写作、翻译、提示词、粘贴文本、小段代码 | Codex 原生能力 |
-| 真实 GitHub 仓库、Issue、Commit、PR、Review、CI | GitHub |
-| 真实 Figma 设计稿、设计系统、设计转代码 | Figma |
-| 真实 Drive、Gmail、Calendar、PDF、Excel 或私有系统 | 对应的主能力 |
-| Figma 作为输入、GitHub 作为交付 | Figma + GitHub |
-| 模糊项目需求 | 先用原生能力启动，只追问会影响第一步的问题 |
-
-## 核心行为
-
-- 第一段只给 3 到 6 行的工具判断。
-- 默认只选择一个主工具；只有必要阶段才增加一个辅助工具。
-- 可选增强不在启动回复展开。
-- 插件没装时，继续完成不依赖插件的部分。
-- 不编造安装链接、深链接、权限或安装状态。
-- 涉及私有数据和写操作时，给出简短安全提示。
-- 对依赖时效性的工具推荐，先检查当前 Codex 能力信息。
-
-## 国际化使用
-
-本仓库提供英文主 README 与本中文完整说明。SkillScout 会尽量按用户的语言，用通俗说法解释工具，而不是照抄英文插件简介。其他语言的维护方式见 [本地化指南](docs/localization-guide.md)。
-
-## 当前能力信息
-
-SkillScout 把仓库中的数据视为决策模型，而不是永远不变的插件目录。当推荐取决于当前已安装、刚发布或当前支持的能力时，它会先检查当前会话的能力目录，再在可用时查询官方 Codex 信息。无法验证时效性时，只会推荐能力类别，不会编造具体插件可用性。详见[实时能力策略](docs/live-catalog-policy.md)。
-
-## 安装
-
-将该文件夹以 `skillscout` 名称复制或克隆到 Codex Skills 目录（常见位置：`$CODEX_HOME/skills/skillscout`），然后刷新 Codex：
-
-```text
-使用 $skillscout 为我的项目选择最佳启动方案，并直接继续执行。
-```
-
-### 通过 GitHub marketplace 安装为 Codex 插件
-
-本仓库已提供公开的 Codex marketplace 来源。使用新版 Codex CLI 时可以执行：
-
-```text
+```bash
 codex plugin marketplace add MalphtieYU/skillscout
 codex plugin add skillscout@skillscout-marketplace
 ```
 
-安装后请重启 Codex 或新开一个对话。这个 GitHub marketplace 已可使用；进入 ChatGPT/Codex 通用插件目录仍需通过 OpenAI 的单独审核。
+重新开一个 Codex 任务后，直接描述真实目标：
+
+```text
+使用 $skillscout 启动一个从 Figma 到 React 的项目，然后准备提交 GitHub Pull Request。
+```
+
+```text
+使用 $skillscout 判断分析这份销售工作簿需要的最小安全能力，并开始生成报告。
+```
+
+市场源更新后可执行：
+
+```bash
+codex plugin marketplace upgrade skillscout-marketplace
+```
+
+## 它如何选择
+
+1. 自包含、文本型的小任务优先使用 Codex 原生能力。
+2. 识别真正的输入与交付：仓库、Figma 文件、Drive 文档、邮箱、日历、PDF、工作簿或私有系统。
+3. 只有某项能力能解锁真实工作时，才加入一个主能力。
+4. 只有后续必需阶段无法完成时，才加入一个辅助能力。
+5. 可选工具留到最后；项目先开始。
+
+| 真实任务 | 默认第一路径 |
+| --- | --- |
+| 写作、翻译、提示词、粘贴文本、小型代码修改 | Codex 原生能力 |
+| GitHub 仓库、Issue、PR、Review、CI | GitHub 能力 |
+| Figma 文件或设计系统 | Figma 能力 |
+| 云文件、邮箱、日历、PDF、工作簿 | 对应的文件或 App 能力 |
+| 新闻、价格、法规、最新发布信息 | 已验证的网络检索 |
+| 私有数据库、内部 API、自定义系统 | 最小权限的 MCP |
+
+## 信息时效与安全
+
+SkillScout 的规则数据是决策模型，而不是永远正确的插件目录。涉及“当前可用、已安装、刚发布、最新”的能力时，它会先查看当前会话，再在可用时核验官方 Codex 信息；无法核实时只推荐能力类别，绝不编造安装链接、上架状态或权限。
+
+涉及私有数据与外部写入时，它会简短说明必要权限或确认点，同时继续完成无需访问即可做的准备工作。
+
+详见[实时能力策略](docs/live-catalog-policy.md)与[决策方式](docs/how-it-works.md)。
+
+## 发布状态
+
+- **现在可用**：公开 GitHub marketplace 源与手动安装 Skill。
+- **ChatGPT/Codex 通用插件目录**：需要单独通过 OpenAI 审核；在审核通过并由发布者正式发布前，项目不会声称自己已在官方目录上架。
+
+## 参与与安全
+
+欢迎改进决策质量、安全边界、时效性和真实案例，而不只是增加工具数量。请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，在 [GitHub Issues](https://github.com/MalphtieYU/skillscout/issues) 提交反馈，安全问题请见 [SECURITY.md](SECURITY.md)。
 
 ## 验证
 
-在仓库根目录运行：
-
-```text
+```bash
 node scripts/validate-data.mjs
+node scripts/package-plugin.mjs
 node scripts/validate-plugin-package.mjs
 ```
 
-脚本会检查 JSON 结构、规则覆盖、案例清单和启动模板。行为测试见 [测试用例](docs/test-cases.md)。
-
-## 未来的一键安装能力
-
-`data/plugin-install-registry.schema.json` 预留了真实安装链接、应用权限、支持的 Codex 端与管理员要求等字段。它并不表示当前一定支持一键安装或 `codex://` 深链接；没有验证入口时，SkillScout 只会提示用户到插件面板搜索。
-
-## 公开插件状态
-
-SkillScout 现已打包为仅含 Skill 的插件，并通过这个公开 GitHub marketplace 分发。通用 Plugins Directory 的上架尚未完成：OpenAI 还要求已验证的发布者身份、Apps Management 写权限、公开的支持/隐私/条款页面、可供审核的启动提示词、至少 5 条正向和 3 条负向测试用例，以及发布者确认的可用国家或地区。详见[提交清单](docs/universal-directory-submission.md)。
-
-## 贡献
-
-阅读 [贡献指南](docs/contribution-guide.md)。欢迎改进决策质量、边界、安全性和表达清晰度，而不是单纯增加工具数量。
+英文说明见 [README.md](README.md)，其他语言的维护方式见[本地化指南](docs/localization-guide.md)。
 
 ## 许可证
 
-MIT。见 [LICENSE](LICENSE)。
+[MIT](LICENSE)

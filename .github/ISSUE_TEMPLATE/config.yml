@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation and installation
+    url: https://github.com/MalphtieYU/skillscout#quick-start
+    about: Read the installation and first-use instructions before opening an issue.

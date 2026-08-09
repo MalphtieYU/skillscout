@@ -1,7 +1,7 @@
 {
   "name": "skillscout",
-  "version": "1.1.0",
-  "description": "Choose one best Codex project-start path and continue the work.",
+  "version": "1.2.0",
+  "description": "Start real Codex work with the smallest useful capability stack.",
   "author": {
     "name": "MalphtieYU",
     "url": "https://github.com/MalphtieYU"
@@ -9,22 +9,22 @@
   "homepage": "https://github.com/MalphtieYU/skillscout",
   "repository": "https://github.com/MalphtieYU/skillscout",
   "license": "MIT",
-  "keywords": ["codex", "tooling", "plugin-selection", "project-start", "skills"],
+  "keywords": ["codex", "project-start", "agent-skills", "plugins", "mcp", "tooling"],
   "skills": "./skills/",
   "interface": {
     "displayName": "SkillScout",
-    "shortDescription": "Pick one best tool, then continue the project.",
-    "longDescription": "A Codex project-start decision layer that chooses the smallest useful path and continues work without a plugin comparison detour.",
+    "shortDescription": "Choose the minimum useful capability stack and start the work.",
+    "longDescription": "A native-first Codex project-start layer that picks the smallest verified capability path, states the first action, and immediately continues the work.",
     "developerName": "MalphtieYU",
     "category": "Productivity",
-    "capabilities": ["Project startup triage", "Native-first tool decisions"],
+    "capabilities": ["Project startup triage", "Native-first capability decisions", "Current-capability safety checks"],
     "websiteURL": "https://github.com/MalphtieYU/skillscout",
     "privacyPolicyURL": "https://github.com/MalphtieYU/skillscout/blob/main/PRIVACY.md",
     "termsOfServiceURL": "https://github.com/MalphtieYU/skillscout/blob/main/TERMS.md",
     "defaultPrompt": [
-      "Use SkillScout to choose a project-start path and continue the work.",
-      "Use SkillScout to decide whether this task needs a plugin or native Codex.",
-      "Use SkillScout to start a Figma-to-React project with the right tools."
+      "Use SkillScout to start this project with the smallest useful Codex capability stack.",
+      "Use SkillScout to decide whether native Codex, skills, plugins, apps, web research, or MCP is needed, then begin.",
+      "Use SkillScout to start a Figma-to-React project and prepare the GitHub delivery path."
     ],
     "brandColor": "#2563EB",
     "composerIcon": "./assets/skillscout-logo.png",

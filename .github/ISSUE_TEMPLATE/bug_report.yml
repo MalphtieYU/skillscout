@@ -1,0 +1,24 @@
+name: Bug report
+description: Report incorrect SkillScout behavior, packaging, or documentation.
+title: "bug: "
+labels: [bug]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Task or prompt
+      description: Remove private data before posting.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true

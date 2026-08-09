@@ -1,17 +1,18 @@
 ---
 name: skillscout
-description: Triage a Codex project at startup, choose one best plugin or native-only path, and continue the work without making the user compare tools. Use when a user invokes SkillScout, asks which capability to use for a project, or needs a low-friction tool decision before execution.
+description: Start a Codex task with the smallest useful capability stack and immediately take the first action. Use when a user invokes SkillScout, is unsure whether to use native Codex, skills, plugins, apps, web research, or MCP, or wants a real project scoped and started without comparing tools.
 ---
 
 # SkillScout
 
-Use SkillScout as a project-start decision layer: **@SkillScout → decide → continue**. Follow the principle **Less tooling, better outcome.**
+Use SkillScout as a project-start and capability-boundary layer: **@SkillScout → decide → act**. Follow the principle **Less tooling, better outcome.**
 
 ## Startup Contract
 
-When invoked with a project request, start with a short tool decision of three to six lines using `prompts/startup-response-template.md`. Then continue the user's project immediately.
+When invoked with a project request, start with a short decision of three to six lines using `prompts/startup-response-template.md`. Then continue the user's project immediately.
 
-- Choose one default best option: native Codex, one primary tool, or the smallest justified pair.
+- Choose one default best option: native Codex, one primary capability, or the smallest justified pair.
+- State the first concrete action, not only the selected capability.
 - Do not ask the user to choose among plugins unless the project cannot proceed without that choice.
 - Do not show a long scoring report at startup.
 - If no plugin is needed, say so once and begin the requested work.
@@ -19,25 +20,30 @@ When invoked with a project request, start with a short tool decision of three t
 
 ## Hard Rules
 
-1. Consider Codex Native Only before any external tool.
+1. Consider Codex Native Only before any installed skill, plugin, app, browser, or MCP tool.
 2. Recommend GitHub only for a real repository, issue, commit, PR, review, or CI workflow.
 3. Recommend Figma only for a real design file, design system, or design-to-code task.
 4. Recommend Gmail or Calendar only for reading, sending, scheduling, or changing real user data.
-5. Recommend MCP only for a clear external service, custom tool, database, or private system.
-6. Default to Native Only for writing, translation, brainstorming, prompt generation, pasted-content analysis, small code fixes, and simple static pages.
-7. Include concise permission and safety guidance for private data or write actions, but continue non-sensitive work.
-8. Ask questions only when an answer materially changes the first execution step.
-9. End the work with the compact summary in `prompts/recommendation-template.md` and a copy-ready next prompt when useful.
+5. Recommend verified web research only when a result depends on current public information.
+6. Recommend MCP only for a clear external service, custom tool, database, or private system.
+7. Default to Native Only for writing, translation, brainstorming, prompt generation, pasted-content analysis, small code fixes, and simple static pages.
+8. Include concise permission and safety guidance for private data or write actions, but continue non-sensitive work.
+9. Ask questions only when an answer materially changes the first execution step.
+10. End the work with the compact summary in `prompts/recommendation-template.md` and a copy-ready next prompt when useful.
 
 ## Decision Procedure
 
 1. Match `data/anti-recommendation-rules.json`; use the native path unless its escalation condition applies.
-2. Identify the real input source, then the real output target. Use `data/single-best-plugin-rules.json` to select one primary tool.
+2. Identify the real input source, then the real output target. Use `data/single-best-plugin-rules.json` to select one primary capability.
 3. Add at most one secondary tool with `data/primary-secondary-tool-rules.json`; keep optional tools out of the startup decision.
 4. Use `data/tool-decision-framework.json` only as an internal guardrail for benefit, complexity, risk, and confidence.
 5. Check `data/plugin-install-registry.schema.json` conventions before presenting an install card. Never invent links, deep links, permissions, or install status.
 6. Read `data/permission-risk-rules.json` whenever the selected tool reads private data or performs writes.
 7. Follow `docs/continue-after-recommendation.md` to continue execution whether the tool is installed, unavailable, or permission-gated.
+
+## Value Check
+
+Do not add a tool merely because it exists. A selected capability must unlock a real source, output, permission, or action that native Codex cannot complete safely in the first milestone. Otherwise start natively and name the possible upgrade path only when it becomes necessary.
 
 ## Fresh Availability Rules
 
@@ -51,7 +57,7 @@ Treat bundled category data as decision guidance, not a live plugin directory. W
 
 ## Output Constraints
 
-- Name no more than one primary tool and one necessary secondary tool at startup.
+- Name no more than one primary capability and one necessary secondary capability at startup.
 - Put optional enhancements only in the final summary.
 - When confidence is Low, start natively, name at most three possible directions, and ask only the questions that unblock the first step.
 - Use plain language and add Chinese explanations when the user writes in Chinese or asks for bilingual output.

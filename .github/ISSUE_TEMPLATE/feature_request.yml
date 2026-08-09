@@ -1,0 +1,24 @@
+name: Decision-pattern proposal
+description: Propose a real task pattern, example, or current-capability correction.
+title: "proposal: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Real user task
+      description: Describe the task without credentials or private content.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-path
+    attributes:
+      label: Smallest useful path
+      description: Explain why native Codex is insufficient, if you propose a tool.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Current source (if relevant)
+      description: Link official documentation for availability-sensitive claims.

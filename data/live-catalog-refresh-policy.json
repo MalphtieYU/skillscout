@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "purpose": "Keep SkillScout recommendations current without treating static project data as a live Codex directory.",
   "runtime_order": [
     "current_session_capability_catalog",
@@ -11,17 +11,19 @@
     "A user asks for currently available, newly released, installed, or recommended plugins.",
     "A recommendation depends on whether a named skill, app, MCP server, or plugin exists now.",
     "Codex publishes a plugin, app, skill, or marketplace update.",
-    "A maintained rule names a capability whose availability may have changed."
+    "A maintained rule names a capability whose availability may have changed.",
+    "A scheduled maintainer review finds a material change in official Codex capabilities, plugin distribution, or submission requirements."
   ],
   "required_behavior": [
     "Inspect current-session metadata before naming a current capability.",
     "Use official OpenAI/Codex sources for product-wide claims when available.",
     "Do not invent install links, deep links, permission requirements, plan requirements, country availability, or marketplace status.",
     "Fall back to a category-level recommendation when freshness cannot be verified.",
-    "Record verified changes in the appropriate rule, example, and documentation files before releasing a new plugin version."
+    "Record verified changes in the appropriate rule, example, and documentation files before releasing a new plugin version.",
+    "Publish validated, low-risk documentation and decision-model updates through the public GitHub marketplace source; do not claim universal-directory publication until OpenAI approval and publisher release."
   ],
   "non_goals": [
-    "This policy does not promise background polling or autonomous marketplace synchronization.",
+    "This policy does not promise that every user session has access to background polling or a live marketplace feed.",
     "This policy does not treat third-party listings as official Codex availability evidence.",
     "This policy does not grant access to private app, workspace, or admin metadata."
   ]
