@@ -2,6 +2,17 @@
 
 Use these cases to review the startup decision manually or in a future automated evaluator. Every startup reply must be short, choose a default, and continue the task.
 
+## Activation regression set
+
+The primary activation set is [`data/activation-golden-prompts.json`](../data/activation-golden-prompts.json). It follows the current OpenAI metadata guidance: test direct requests, indirect outcome requests, and negative prompts separately. Review it whenever SkillScout's trigger description, startup boundary, or marketplace metadata changes.
+
+Required outcomes:
+
+1. Every `direct` and `indirect` prompt activates SkillScout and returns a minimal actionable path.
+2. Every `negative` prompt bypasses SkillScout and lets native Codex answer directly.
+3. Keep false activations out of ordinary writing, translation, pasted-content analysis, and one-off questions.
+4. When an indirect prompt needs current availability, verify the session and official sources rather than turning static data into a plugin directory.
+
 | # | Input | Expected primary decision | Expected behavior |
 | --- | --- | --- | --- |
 | 1 | Write a Midjourney prompt | Native Only | Write the prompt; do not invoke image generation. |
@@ -36,4 +47,3 @@ For every case, confirm that:
 5. A plugin recommendation contains no invented installation link.
 6. An unavailable plugin does not stop native planning or other executable work.
 7. A private-data or write workflow states the relevant safety boundary.
-

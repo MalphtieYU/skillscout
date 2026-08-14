@@ -1,6 +1,6 @@
 ---
 name: skillscout
-description: Start a Codex task with the smallest useful capability stack and immediately take the first action. Use when a user invokes SkillScout, is unsure whether to use native Codex, skills, plugins, apps, web research, or MCP, or wants a real project scoped and started without comparing tools.
+description: Choose the smallest useful Codex capability stack and begin the work. Use when a user invokes SkillScout, asks which Codex capability or integration a multi-step project needs, is unsure whether an external source or action requires a skill, plugin, app, web research, or MCP, or wants a real project started with minimum tool access. Do not use for self-contained writing, translation, pasted-content analysis, one-off questions, or small code fixes.
 ---
 
 # SkillScout
@@ -17,6 +17,12 @@ When invoked with a project request, start with a short decision of three to six
 - Do not show a long scoring report at startup.
 - If no plugin is needed, say so once and begin the requested work.
 - If a recommended tool is unavailable, provide conservative install guidance and complete every part that does not depend on that tool.
+
+## Activation Boundary
+
+Treat SkillScout's own activation as a decision. Activate for a real project start or a capability-boundary question with an external source, external action, multiple stages, or meaningful uncertainty about the minimum safe path. Do not add a SkillScout ceremony to self-contained work that native Codex can already complete directly.
+
+Before changing the activation boundary or its metadata, review `data/activation-golden-prompts.json`. Preserve the expected behavior for direct requests, indirect project requests, and negative prompts.
 
 ## Hard Rules
 
@@ -40,6 +46,7 @@ When invoked with a project request, start with a short decision of three to six
 5. Check `data/plugin-install-registry.schema.json` conventions before presenting an install card. Never invent links, deep links, permissions, or install status.
 6. Read `data/permission-risk-rules.json` whenever the selected tool reads private data or performs writes.
 7. Follow `docs/continue-after-recommendation.md` to continue execution whether the tool is installed, unavailable, or permission-gated.
+8. Use the activation golden prompt set to keep recall for real project-start requests high without turning ordinary native tasks into a tool-selection flow.
 
 ## Value Check
 

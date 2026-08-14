@@ -37,6 +37,7 @@ const singleBestData = readJson("data/single-best-plugin-rules.json");
 const primarySecondaryData = readJson("data/primary-secondary-tool-rules.json");
 const installRegistrySchema = readJson("data/plugin-install-registry.schema.json");
 const liveCatalogPolicy = readJson("data/live-catalog-refresh-policy.json");
+const activationPrompts = readJson("data/activation-golden-prompts.json");
 
 const versionedData = [categoriesData, rulesData, frameworkData, antiRulesData, complexityData, minimalStackData, permissionData, singleBestData, primarySecondaryData];
 for (const data of versionedData) {
@@ -44,6 +45,20 @@ for (const data of versionedData) {
 }
 assert(/^\d+\.\d+\.\d+$/.test(liveCatalogPolicy.schema_version), "live catalog policy needs a semantic schema_version");
 for (const field of ["runtime_order", "refresh_triggers", "required_behavior", "non_goals"]) nonEmptyArray(liveCatalogPolicy[field], `live catalog policy.${field}`);
+assert(/^\d+\.\d+\.\d+$/.test(activationPrompts.schema_version), "activation golden prompts need a semantic schema_version");
+assert(typeof activationPrompts.purpose === "string" && activationPrompts.purpose.trim(), "activation golden prompts need a purpose");
+nonEmptyArray(activationPrompts.review_instructions, "activation golden prompt review instructions");
+nonEmptyArray(activationPrompts.prompts, "activation golden prompts");
+unique(activationPrompts.prompts.map((prompt) => prompt.id), "activation golden prompt ids");
+const activationLabels = new Set(["direct", "indirect", "negative"]);
+for (const prompt of activationPrompts.prompts) {
+  assert(typeof prompt.id === "string" && prompt.id.trim(), "each activation prompt needs an id");
+  assert(activationLabels.has(prompt.label), `activation prompt ${prompt.id} has an invalid label`);
+  assert(typeof prompt.prompt === "string" && prompt.prompt.trim(), `activation prompt ${prompt.id} needs prompt text`);
+  assert(typeof prompt.expected_activation === "boolean", `activation prompt ${prompt.id} needs expected_activation`);
+  assert(typeof prompt.expected_path === "string" && prompt.expected_path.trim(), `activation prompt ${prompt.id} needs expected_path`);
+}
+for (const label of activationLabels) assert(activationPrompts.prompts.some((prompt) => prompt.label === label), `activation golden prompts need a ${label} case`);
 
 nonEmptyArray(categoriesData.categories, "categories");
 nonEmptyArray(rulesData.rules, "recommendation rules");

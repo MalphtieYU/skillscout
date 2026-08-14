@@ -1,7 +1,7 @@
 {
   "name": "skillscout",
-  "version": "1.2.0",
-  "description": "Start real Codex work with the smallest useful capability stack.",
+  "version": "1.3.0",
+  "description": "Choose the minimum useful Codex capability stack and begin real project work.",
   "author": {
     "name": "MalphtieYU",
     "url": "https://github.com/MalphtieYU"
@@ -14,16 +14,16 @@
   "interface": {
     "displayName": "SkillScout",
     "shortDescription": "Choose the minimum useful capability stack and start the work.",
-    "longDescription": "A native-first Codex project-start layer that picks the smallest verified capability path, states the first action, and immediately continues the work.",
+    "longDescription": "A native-first Codex project-start layer that activates for real capability-boundary work, selects the smallest verified path, states the first action, and avoids interrupting self-contained tasks.",
     "developerName": "MalphtieYU",
     "category": "Productivity",
-    "capabilities": ["Project startup triage", "Native-first capability decisions", "Current-capability safety checks"],
+    "capabilities": ["Project-start triage", "Native-first capability decisions", "Current-capability safety checks", "Precision-tested activation boundary"],
     "websiteURL": "https://github.com/MalphtieYU/skillscout",
     "privacyPolicyURL": "https://github.com/MalphtieYU/skillscout/blob/main/PRIVACY.md",
     "termsOfServiceURL": "https://github.com/MalphtieYU/skillscout/blob/main/TERMS.md",
     "defaultPrompt": [
       "Use SkillScout to start this project with the smallest useful Codex capability stack.",
-      "Use SkillScout to decide whether native Codex, skills, plugins, apps, web research, or MCP is needed, then begin.",
+      "Use SkillScout to decide the smallest safe path for a multi-stage project, then begin.",
       "Use SkillScout to start a Figma-to-React project and prepare the GitHub delivery path."
     ],
     "brandColor": "#2563EB",

@@ -9,6 +9,10 @@ SkillScout is a **project-start and capability-boundary skill for Codex**. Give 
 
 It is not a plugin catalog and it never makes users compare a long list before they can make progress.
 
+## What changed in 1.3
+
+SkillScout now treats **when it activates** as part of product quality. Its regression set covers direct requests, indirect outcome requests, and negative prompts, so real project-start questions are recognized while ordinary writing, translation, pasted-code help, and one-off questions stay native. This follows the current OpenAI guidance to optimize metadata for both relevant recall and negative-prompt precision.
+
 ## What users get
 
 Within the first response, SkillScout returns:
@@ -77,6 +81,8 @@ SkillScout treats its data as a decision model, **not** a frozen plugin director
 For private data and external writes, it names the relevant access or confirmation boundary and still completes all safe preparation work.
 
 See the [live capability policy](docs/live-catalog-policy.md) and [decision model](docs/how-it-works.md).
+
+The activation regression set is versioned in [data/activation-golden-prompts.json](data/activation-golden-prompts.json) and explained in the [behavior test cases](docs/test-cases.md).
 
 ## Distribution status
 

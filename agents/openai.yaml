@@ -1,4 +1,4 @@
 interface:
   display_name: "SkillScout"
-  short_description: "Choose the minimum useful capability stack and start the work."
-  default_prompt: "Use $skillscout to choose the smallest useful Codex capability stack for this project and take the first action."
+  short_description: "Choose the minimum useful stack for a real project and begin."
+  default_prompt: "Use $skillscout to choose the smallest safe Codex capability stack for this project and take the first action."

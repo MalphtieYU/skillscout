@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "Prevent SkillScout from missing real capability-boundary requests or interrupting self-contained native Codex work.",
+  "review_instructions": [
+    "Evaluate every prompt after any change to the SKILL.md description, activation boundary, startup contract, or plugin metadata.",
+    "Record the observed activation and startup decision in a pull request, issue, or release note when behavior changes.",
+    "Prioritize precision on negative prompts before attempting to widen activation recall."
+  ],
+  "prompts": [
+    {
+      "id": "direct-skillscout-project-start",
+      "label": "direct",
+      "prompt": "Use SkillScout to start a Figma-to-React project and prepare the GitHub delivery path.",
+      "expected_activation": true,
+      "expected_path": "Figma primary; GitHub secondary only when delivery begins."
+    },
+    {
+      "id": "direct-capability-choice",
+      "label": "direct",
+      "prompt": "Which Codex capability is the minimum safe path for turning this shared spreadsheet into a weekly report?",
+      "expected_activation": true,
+      "expected_path": "Choose the matching spreadsheet or file capability only if a real workbook is available."
+    },
+    {
+      "id": "direct-plugin-question",
+      "label": "direct",
+      "prompt": "Do I need a plugin, MCP, or only native Codex to query our internal inventory system?",
+      "expected_activation": true,
+      "expected_path": "Explain the MCP boundary and least-privilege access; do not invent availability."
+    },
+    {
+      "id": "indirect-multi-stage-project",
+      "label": "indirect",
+      "prompt": "Turn our GitHub issue backlog into a release plan and then open a pull request with the documentation update.",
+      "expected_activation": true,
+      "expected_path": "GitHub is the primary capability because the repository is both source and delivery target."
+    },
+    {
+      "id": "indirect-current-information",
+      "label": "indirect",
+      "prompt": "Compare today's public competitor pricing with our uploaded plan and recommend the next move.",
+      "expected_activation": true,
+      "expected_path": "Use verified web research for current facts and a file or spreadsheet capability only when the uploaded plan needs inspection."
+    },
+    {
+      "id": "indirect-ambiguous-project",
+      "label": "indirect",
+      "prompt": "I have a product idea but no stack or design yet. Help me start the first useful milestone.",
+      "expected_activation": true,
+      "expected_path": "Start natively with a brief and avoid recommending a catalog of tools."
+    },
+    {
+      "id": "negative-translation",
+      "label": "negative",
+      "prompt": "Translate this paragraph into Chinese.",
+      "expected_activation": false,
+      "expected_path": "Native Codex translates directly."
+    },
+    {
+      "id": "negative-pasted-code",
+      "label": "negative",
+      "prompt": "Explain why this pasted JavaScript function throws an error.",
+      "expected_activation": false,
+      "expected_path": "Native Codex analyzes the supplied snippet directly."
+    },
+    {
+      "id": "negative-copy-edit",
+      "label": "negative",
+      "prompt": "Rewrite this email to sound warmer and shorter.",
+      "expected_activation": false,
+      "expected_path": "Native Codex rewrites the pasted content without Gmail."
+    },
+    {
+      "id": "negative-one-off-answer",
+      "label": "negative",
+      "prompt": "What does MCP stand for?",
+      "expected_activation": false,
+      "expected_path": "Answer the one-off question directly."
+    }
+  ]
+}
