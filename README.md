@@ -76,7 +76,7 @@ SkillScout uses this order:
 
 ## Freshness and safety
 
-SkillScout treats its data as a decision model, **not** a frozen plugin directory. For a current, installed, newly released, or availability-sensitive claim, it checks the current session first and then official Codex sources when available. If the fact cannot be verified, it recommends the capability category rather than inventing an install link or listing status.
+SkillScout treats its data as a decision model, **not** a frozen plugin directory. For a current, installed, newly released, or availability-sensitive claim, it checks the current session first and then official Codex sources when available. The current discovery surface is the **Plugin Directory**; a directory listing, installation policy, required-app access, and source-system permission are separate checks. If the fact cannot be verified, it recommends the capability category rather than inventing an install link or listing status.
 
 For private data and external writes, it names the relevant access or confirmation boundary and still completes all safe preparation work.
 

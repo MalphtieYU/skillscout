@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "purpose": "Keep SkillScout recommendations current without treating static project data as a live Codex directory.",
   "runtime_order": [
     "current_session_capability_catalog",
@@ -12,12 +12,15 @@
     "A recommendation depends on whether a named skill, app, MCP server, or plugin exists now.",
     "Codex publishes a plugin, app, skill, or marketplace update.",
     "A maintained rule names a capability whose availability may have changed.",
+    "Official guidance changes the directory, installation, role-access, or app-permission model.",
     "A scheduled maintainer review finds a material change in official Codex capabilities, plugin distribution, or submission requirements.",
     "Official guidance changes how plugin or skill metadata should be evaluated for relevance, precision, or recall."
   ],
   "required_behavior": [
     "Inspect current-session metadata before naming a current capability.",
     "Use official OpenAI/Codex sources for product-wide claims when available.",
+    "Treat Plugin Directory listing, installation policy, required-app access, and source-system permission as separate checks.",
+    "Use the current term ‘Plugin Directory’; do not describe the retired App Directory as the current discovery surface.",
     "Do not invent install links, deep links, permission requirements, plan requirements, country availability, or marketplace status.",
     "Fall back to a category-level recommendation when freshness cannot be verified.",
     "Record verified changes in the appropriate rule, example, and documentation files before releasing a new plugin version.",
@@ -28,5 +31,13 @@
     "This policy does not promise that every user session has access to background polling or a live marketplace feed.",
     "This policy does not treat third-party listings as official Codex availability evidence.",
     "This policy does not grant access to private app, workspace, or admin metadata."
+  ],
+  "verified_platform_changes": [
+    {
+      "verified_on": "2026-08-17",
+      "source": "https://help.openai.com/en/articles/20001256-plugins-in-codex/",
+      "change": "The App Directory migrated to the Plugin Directory on 2026-07-09; plugin visibility, installation policy, role/app access, and source-system authorization remain distinct checks.",
+      "repository_effect": "Use Plugin Directory terminology and preserve availability caveats in all current-capability recommendations."
+    }
   ]
 }

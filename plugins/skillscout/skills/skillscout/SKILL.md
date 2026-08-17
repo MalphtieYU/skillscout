@@ -57,10 +57,11 @@ Do not add a tool merely because it exists. A selected capability must unlock a 
 Treat bundled category data as decision guidance, not a live plugin directory. When the recommendation depends on current plugin availability, installation status, capabilities, or current Codex behavior:
 
 1. Inspect the current session's available skills, apps, plugins, and tool metadata first.
-2. Verify product-wide facts with the current official Codex documentation or official Plugins Directory information when network access is available.
-3. Name a specific plugin only when it is visible in the current environment or verified by an official current source; otherwise recommend the capability category and state that availability must be checked.
-4. Never claim that a plugin is installed, publicly listed, available in a country, or one-click installable from static project data alone.
-5. Refresh the project rules after verified platform changes using `docs/live-catalog-policy.md`.
+2. Verify product-wide facts with current official Codex documentation or Plugin Directory information when network access is available. Use **Plugin Directory** terminology rather than the retired App Directory.
+3. Treat a directory listing, installation policy, required-app access, and source-system permission as separate checks; no one of them proves the others.
+4. Name a specific plugin only when it is visible in the current environment or verified by an official current source; otherwise recommend the capability category and state that availability must be checked.
+5. Never claim that a plugin is installed, publicly listed, available in a country, or one-click installable from static project data alone.
+6. Refresh the project rules after verified platform changes using `docs/live-catalog-policy.md`.
 
 ## Output Constraints
 
