@@ -1,7 +1,7 @@
 {
   "name": "skillscout",
-  "version": "1.3.0",
-  "description": "Choose the minimum useful Codex capability stack and begin real project work.",
+  "version": "1.4.0",
+  "description": "Stop tool overload: choose the minimum useful Codex path and begin real project work.",
   "author": {
     "name": "MalphtieYU",
     "url": "https://github.com/MalphtieYU"
@@ -13,11 +13,11 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "SkillScout",
-    "shortDescription": "Choose the minimum useful capability stack and start the work.",
-    "longDescription": "A native-first Codex project-start layer that activates for real capability-boundary work, selects the smallest verified path, states the first action, and avoids interrupting self-contained tasks.",
+    "shortDescription": "Stop tool overload and start the work.",
+    "longDescription": "A native-first Codex project-start layer that selects the smallest verified path, states the first action, and avoids interrupting self-contained tasks with unnecessary tool choices.",
     "developerName": "MalphtieYU",
     "category": "Productivity",
-    "capabilities": ["Project-start triage", "Native-first capability decisions", "Current-capability safety checks", "Precision-tested activation boundary"],
+    "capabilities": ["Project-start triage", "Native-first capability decisions", "Current-capability safety checks", "Transparent decision showcase", "Precision-tested activation boundary"],
     "websiteURL": "https://github.com/MalphtieYU/skillscout",
     "privacyPolicyURL": "https://github.com/MalphtieYU/skillscout/blob/main/PRIVACY.md",
     "termsOfServiceURL": "https://github.com/MalphtieYU/skillscout/blob/main/TERMS.md",

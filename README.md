@@ -1,99 +1,63 @@
 # SkillScout
 
-> Start real Codex work with the smallest useful capability stack.
+> **Stop tool overload. Pick the smallest useful Codex path, then start the work.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-2563EB.svg)](LICENSE)
 [![Codex plugin](https://img.shields.io/badge/Codex-plugin-06B6D4.svg)](plugins/skillscout/.codex-plugin/plugin.json)
+[![Version](https://img.shields.io/badge/version-1.4.0-0EA5E9.svg)](plugins/skillscout/.codex-plugin/plugin.json)
 
-SkillScout is a **project-start and capability-boundary skill for Codex**. Give it a real task and it decides whether to use built-in Codex, an installed skill, a plugin, an app, MCP, or no extra tool at all—then it starts the work.
+<img src="assets/skillscout-path-hero.png" alt="One clear path through a complex tool landscape" width="100%" />
 
-It is not a plugin catalog and it never makes users compare a long list before they can make progress.
+SkillScout is an open-source, native-first project-start skill for Codex. Give it a real task and it decides whether native Codex is enough or whether one external capability is genuinely required. Then it takes the first useful action.
 
-## What changed in 1.3
+It is **not** another plugin directory. It is the decision layer that keeps a project from starting with five unnecessary tools.
 
-SkillScout now treats **when it activates** as part of product quality. Its regression set covers direct requests, indirect outcome requests, and negative prompts, so real project-start questions are recognized while ordinary writing, translation, pasted-code help, and one-off questions stay native. This follows the current OpenAI guidance to optimize metadata for both relevant recall and negative-prompt precision.
+## See the difference
 
-## What users get
+| Real request | SkillScout starts with | Why |
+| --- | --- | --- |
+| “Rewrite this customer email.” | Native Codex | The work is self-contained; extra tools only add friction. |
+| “Fix this issue and open a PR.” | GitHub | The repository and pull request are the actual work surface. |
+| “Turn this Figma screen into React.” | Figma + GitHub when delivery needs it | Design context comes first; the repository is added only for the delivery step. |
+| “Compare current pricing plans.” | Verified web research | The answer depends on changing public information. |
+| “Analyze our internal usage table.” | Minimum-permission data connection | A private source is required, so access and safety matter. |
 
-Within the first response, SkillScout returns:
+Read the [three-minute tour](docs/three-minute-tour.md) for complete inputs, decisions, and next actions.
 
-1. **The smallest viable path** — native Codex, one primary capability, or one necessary pair.
-2. **Why that path fits** — based on the actual input, output, and risk.
-3. **The first action** — it continues the task instead of ending with a recommendation.
-4. **Only the access boundary that matters** — for example, a repository permission or a required file.
+## Start in three minutes
 
-Use it when a task mixes skills, plugins, apps, MCP, files, repositories, or current web information and you want to begin with confidence.
+1. Add the public marketplace source and install the plugin:
 
-Do **not** use it for a small writing task, pasted snippet, simple translation, or a one-off question: Codex can simply do those directly.
+   ```bash
+   codex plugin marketplace add MalphtieYU/skillscout
+   codex plugin add skillscout@skillscout-marketplace
+   ```
 
-## Quick start
+2. Start a Codex task with a concrete request:
 
-Install the public GitHub marketplace source with a current Codex CLI:
+   ```text
+   Use $skillscout to turn this Figma screen into React and prepare the GitHub delivery path.
+   ```
 
-```bash
-codex plugin marketplace add MalphtieYU/skillscout
-codex plugin add skillscout@skillscout-marketplace
-```
+3. SkillScout names the smallest viable path, states the first action, and continues the work. It does not stop at a tool recommendation.
 
-Start a new Codex task, then use a real request:
-
-```text
-Use $skillscout to start a Figma-to-React project, then prepare it for a GitHub pull request.
-```
-
-```text
-Use $skillscout to decide the minimum safe path for analyzing this sales workbook and create the report.
-```
-
-```text
-Use $skillscout to start this ambiguous product idea; choose only the capabilities needed for the first useful milestone.
-```
-
-To refresh the GitHub marketplace source after an update:
+Prefer a no-install preview? Run the deterministic showcase from this repository:
 
 ```bash
-codex plugin marketplace upgrade skillscout-marketplace
+node scripts/run-decision-demo.mjs
 ```
 
-## How it makes the decision
+## Why it earns a place in your workflow
 
-SkillScout uses this order:
+- **Native first.** Writing, translation, pasted content, and small fixes stay in Codex unless a real external dependency exists.
+- **One primary capability.** It selects a single default path, adding at most one necessary secondary capability.
+- **Real boundaries.** A visible plugin listing does not prove installation, app access, or permission to the connected source.
+- **Work begins immediately.** The recommendation includes the first concrete action instead of a long comparison table.
+- **Regression-tested behavior.** Direct, indirect, and negative prompts are versioned so the skill does not activate just because a tool name appears.
 
-1. Prefer built-in Codex for self-contained work.
-2. Identify the real input and output: repository, Figma file, Drive document, inbox, calendar, PDF, workbook, or external system.
-3. Add one primary capability only when it unlocks that real work.
-4. Add one secondary capability only when a required later stage cannot proceed without it.
-5. Keep optional tools out of the startup response and continue the job.
+## Built to be proven, not merely described
 
-| Task reality | Default first path |
-| --- | --- |
-| Writing, translation, prompt work, pasted text, small code fix | Native Codex |
-| GitHub repository, issue, PR, review, CI | GitHub capability |
-| Figma file or design system | Figma capability |
-| Real cloud file, mailbox, calendar, PDF, workbook | Matching file or app capability |
-| Current public facts, news, prices, laws, releases | Verified web research |
-| Private database, internal API, custom system | MCP with least-privilege access |
-
-## Freshness and safety
-
-SkillScout treats its data as a decision model, **not** a frozen plugin directory. For a current, installed, newly released, or availability-sensitive claim, it checks the current session first and then official Codex sources when available. If the fact cannot be verified, it recommends the capability category rather than inventing an install link or listing status.
-
-For private data and external writes, it names the relevant access or confirmation boundary and still completes all safe preparation work.
-
-See the [live capability policy](docs/live-catalog-policy.md) and [decision model](docs/how-it-works.md).
-
-The activation regression set is versioned in [data/activation-golden-prompts.json](data/activation-golden-prompts.json) and explained in the [behavior test cases](docs/test-cases.md).
-
-## Distribution status
-
-- **Available now:** public GitHub marketplace source and manual skill installation.
-- **Universal ChatGPT/Codex Plugins Directory:** a separate OpenAI review flow. This project is packaged for a skills-only submission, but it must not claim directory availability until the publisher completes review and publication.
-
-## Contributing and security
-
-Contributions should improve decision quality, safety, currentness, or concrete examples—not merely add more tools. Read [CONTRIBUTING.md](CONTRIBUTING.md), open a [GitHub issue](https://github.com/MalphtieYU/skillscout/issues), and report security concerns via [SECURITY.md](SECURITY.md).
-
-## Verification
+Run the repository checks before publishing a change:
 
 ```bash
 node scripts/validate-data.mjs
@@ -101,9 +65,25 @@ node scripts/package-plugin.mjs
 node scripts/validate-plugin-package.mjs
 ```
 
-## Language support
+The decision showcase is intentionally transparent: it demonstrates five stable routing examples; it does **not** claim to be telemetry, a live marketplace, or a measure of model quality. See [how SkillScout works](docs/how-it-works.md) and the [activation test cases](docs/test-cases.md).
 
-The primary README is English for broad discoverability. Read the complete [Simplified Chinese guide](README.zh-CN.md), and see the [localization guide](docs/localization-guide.md) for additional languages.
+## Current availability and safety
+
+SkillScout checks the current session before it names a current capability. The official discovery surface is the **Plugin Directory**; a listing, installation policy, required-app access, and source-system permission are separate checks. If any of those cannot be verified, SkillScout recommends the capability category rather than inventing availability or an install path.
+
+- **Available now:** public GitHub marketplace source and manual skill installation.
+- **Universal ChatGPT/Codex Plugin Directory:** requires a separate OpenAI review and publisher release. This repository does not claim directory availability before that happens.
+
+## Help shape the next version
+
+Open an issue with the task you expected SkillScout to handle, the path it chose, and the path you believe it should choose. The most valuable contributions are real workflow examples, counterexamples, and fixes that reduce tool sprawl.
+
+If SkillScout saves you a round of tool selection, please star the repository—it helps other Codex users find it.
+
+- Read the [Simplified Chinese guide](README.zh-CN.md)
+- Review the [contribution guide](CONTRIBUTING.md)
+- See the [live capability policy](docs/live-catalog-policy.md)
+- Report security concerns through [SECURITY.md](SECURITY.md)
 
 ## License
 

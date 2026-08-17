@@ -37,7 +37,7 @@ for (const relativePath of ["SKILL.md", "agents/openai.yaml", "data/single-best-
   assert(existsSync(resolve(root, packagedSkill, relativePath)), `missing packaged skill resource: ${relativePath}`);
 }
 const skillContent = readFileSync(resolve(root, packagedSkill, "SKILL.md"), "utf8");
-assert(/^---\nname: skillscout\ndescription: .+\n---/s.test(skillContent), "packaged SKILL.md needs valid frontmatter");
+assert(/^---\r?\nname: skillscout\r?\ndescription: .+\r?\n---/s.test(skillContent), "packaged SKILL.md needs valid frontmatter");
 
 assert(marketplace.name === "skillscout-marketplace", "marketplace must use the expected name");
 const entry = marketplace.plugins?.find((plugin) => plugin.name === "skillscout");

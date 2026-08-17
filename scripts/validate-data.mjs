@@ -38,6 +38,7 @@ const primarySecondaryData = readJson("data/primary-secondary-tool-rules.json");
 const installRegistrySchema = readJson("data/plugin-install-registry.schema.json");
 const liveCatalogPolicy = readJson("data/live-catalog-refresh-policy.json");
 const activationPrompts = readJson("data/activation-golden-prompts.json");
+const decisionDemo = readJson("data/decision-demo-cases.json");
 
 const versionedData = [categoriesData, rulesData, frameworkData, antiRulesData, complexityData, minimalStackData, permissionData, singleBestData, primarySecondaryData];
 for (const data of versionedData) {
@@ -59,6 +60,17 @@ for (const prompt of activationPrompts.prompts) {
   assert(typeof prompt.expected_path === "string" && prompt.expected_path.trim(), `activation prompt ${prompt.id} needs expected_path`);
 }
 for (const label of activationLabels) assert(activationPrompts.prompts.some((prompt) => prompt.label === label), `activation golden prompts need a ${label} case`);
+
+assert(/^\d+\.\d+\.\d+$/.test(decisionDemo.schema_version), "decision demo needs a semantic schema_version");
+assert(typeof decisionDemo.purpose === "string" && decisionDemo.purpose.trim(), "decision demo needs a purpose");
+nonEmptyArray(decisionDemo.cases, "decision demo cases");
+unique(decisionDemo.cases.map((item) => item.id), "decision demo ids");
+for (const item of decisionDemo.cases) {
+  for (const field of ["id", "request", "primary_path", "first_action", "reason"]) {
+    assert(typeof item[field] === "string" && item[field].trim(), `decision demo case needs ${field}`);
+  }
+  assert(item.secondary_path === undefined || (typeof item.secondary_path === "string" && item.secondary_path.trim()), "decision demo secondary_path must be a non-empty string when present");
+}
 
 nonEmptyArray(categoriesData.categories, "categories");
 nonEmptyArray(rulesData.rules, "recommendation rules");
@@ -149,4 +161,4 @@ for (const relativePath of ["README.md", "README.zh-CN.md", "docs/continue-after
   assert(existsSync(resolve(root, relativePath)), `missing required project file: ${relativePath}`);
 }
 
-console.log(`SkillScout data is valid: ${categoryNames.length} categories, ${projectTypes.length} recommendation rules, ${singleBestData.rules.length} primary-tool rules, ${antiRulesData.rules.length} anti-recommendation rules, ${expectedExamples.length + inlineExamples.length} examples, and bilingual documentation.`);
+console.log(`SkillScout data is valid: ${categoryNames.length} categories, ${projectTypes.length} recommendation rules, ${singleBestData.rules.length} primary-tool rules, ${antiRulesData.rules.length} anti-recommendation rules, ${decisionDemo.cases.length} decision demos, ${expectedExamples.length + inlineExamples.length} examples, and bilingual documentation.`);

@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "A transparent, deterministic showcase of SkillScout's native-first decision behavior. These examples are not telemetry or model-quality benchmarks.",
+  "cases": [
+    {
+      "id": "rewrite-customer-email",
+      "request": "Rewrite this customer email so it is concise and calm.",
+      "primary_path": "Native Codex",
+      "first_action": "Read the supplied email and draft a concise rewrite.",
+      "reason": "The request is self-contained writing; no external system is needed."
+    },
+    {
+      "id": "fix-and-pr",
+      "request": "Fix this issue in my repository and open a pull request.",
+      "primary_path": "GitHub",
+      "first_action": "Inspect the repository, current branch, and issue context.",
+      "reason": "The repository and pull request are required work surfaces."
+    },
+    {
+      "id": "figma-to-react",
+      "request": "Implement this Figma screen in React and prepare the GitHub delivery path.",
+      "primary_path": "Figma",
+      "secondary_path": "GitHub",
+      "first_action": "Read the Figma design context before changing code.",
+      "reason": "Design context is required first; GitHub becomes necessary only for delivery."
+    },
+    {
+      "id": "current-pricing",
+      "request": "Compare the current pricing plans of these services.",
+      "primary_path": "Verified web research",
+      "first_action": "Find and read the current official pricing pages.",
+      "reason": "Pricing is time-sensitive public information."
+    },
+    {
+      "id": "internal-usage-analysis",
+      "request": "Analyze our internal usage table and recommend the next retention experiment.",
+      "primary_path": "Minimum-permission data connection",
+      "first_action": "Confirm the source, metric definitions, and read permission before querying data.",
+      "reason": "A private data source is indispensable and must be handled with explicit access boundaries."
+    }
+  ]
+}
