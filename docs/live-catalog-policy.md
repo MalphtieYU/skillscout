@@ -25,6 +25,12 @@ Update the repository after a verified platform change:
 
 Maintainers may run a recurring official-source review to identify material platform changes. It must preserve the runtime rules above: updates may improve repository data and documentation, but they cannot turn a static skill into a live directory or bypass a user's account, workspace, or marketplace policy.
 
+## Verified maintainer record
+
+| Verified on | Official source | Material change | SkillScout effect |
+| --- | --- | --- | --- |
+| 2026-08-17 | [Plugins in ChatGPT and Codex](https://help.openai.com/en/articles/20001256-plugins-in-codex/) | The App Directory migrated to the Plugin Directory on 2026-07-09. A directory listing, installation policy, required-app access, and source-system authorization are separate states. | Use **Plugin Directory** terminology. Before naming a current plugin, verify the current session, then distinguish visibility, installation/use eligibility, required-app access, and the user's access in the connected source. |
+
 ## Boundaries
 
 SkillScout does not scrape private marketplaces, bypass workspace policy, or assume a user's installation state. A maintainer monitor is only a repository-maintenance aid; a recommendation still performs freshness checks at the time it needs a current fact. That is safer than promising a live catalog when the environment cannot verify one.
