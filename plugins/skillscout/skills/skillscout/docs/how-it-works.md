@@ -2,6 +2,8 @@
 
 SkillScout is a startup decision layer, not a plugin catalog. It reduces choices, picks the best starting path, and continues the work.
 
+For a fast, reproducible preview, run `node scripts/run-decision-demo.mjs` or read the [three-minute tour](three-minute-tour.md). The demo is a transparent showcase of stable examples, not a claim about live routing or model-quality measurement.
+
 ## The interaction model
 
 ```text

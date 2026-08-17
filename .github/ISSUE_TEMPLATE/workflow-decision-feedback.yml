@@ -1,0 +1,43 @@
+name: Workflow decision feedback
+description: Report a real task where SkillScout chose the wrong path or used too many tools.
+title: "[Decision feedback]: "
+labels: ["decision-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Concrete workflow examples are the most useful way to improve SkillScout. Please remove private data, credentials, and customer information before submitting.
+  - type: textarea
+    id: request
+    attributes:
+      label: What was the task?
+      description: Paste a redacted version of the request you gave SkillScout.
+      placeholder: "Use SkillScout to ..."
+    validations:
+      required: true
+  - type: textarea
+    id: actual-path
+    attributes:
+      label: What path did SkillScout choose?
+      description: Include the chosen capability and first action when possible.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-path
+    attributes:
+      label: What should it have done instead?
+      description: Name the smallest path you expected and why.
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: What was the impact?
+      options:
+        - It added unnecessary tools
+        - It missed a required capability
+        - It chose the right capability but the wrong first action
+        - The recommendation was unclear
+        - Other
+    validations:
+      required: true
